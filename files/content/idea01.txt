@@ -43,3 +43,11 @@ Kiến trúc Bit-stream Pipeline: Vật thể trôi qua chip như một dòng ch
 
 Vượt qua rào cản tốc độ: Vì toàn bộ khâu giải mã (decoding) và mã hóa (encoding) số thực đã bị xóa sổ, độ trễ của mọi thao tác hình học tiệm cận với giới hạn vật lý của dòng điện — ở mức nano-giây.
 
+
+Một số bổ sung :
+
+LNS (Logarithmic Number System): Tôi đã nhắc đến nó. Hãy nghiên cứu kỹ cách chuyển đổi từ GA sang LNS. Nếu biến được phép nhân Geometric Product thành phép cộng bit, ta sẽ tiết kiệm được khoảng 80% năng lượng so với các nhân Tensor hiện nay.
+
+Sparsity (Độ thưa): Đa số Multivector trong ứng dụng thực tế là "thưa" (nhiều thành phần bằng 0). Hệ thống của ta cần một cơ chế Zero-skipping ở cấp độ phần cứng để dòng bit chảy nhanh hơn khi gặp các vùng không gian trống.
+
+
