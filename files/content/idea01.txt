@@ -1,0 +1,37 @@
+Tên đề án: GA-BitStream Architecture (GABA)
+
+
+
+Cấu trúc tính toán hình học dựa trên Đại số Geometric (Clifford) và Luồng bit số nguyên lớn.
+
+
+
+1. Số hóa thực thể: Từ Tọa độ sang Multivector-Integer
+
+Thay vì lưu tọa độ rời rạc, chúng ta sử dụng Geometric Algebra (GA). Trong GA, một vật thể không phải là tập hợp các điểm, mà là một Multivector.
+
++ Mã hóa vật thể vào một chuỗi bit gọi là Sparse Multivector Bit-string.
+
++ Mỗi phân đoạn bit đại diện cho một "Blade" (điểm, đường, mặt, khối).
+
++ Thay vì dùng số thực 32-bit (float), ta sử dụng Fixed-point arithmetic (số điểm cố định) được đóng gói vào một số nguyên cực lớn. Điều này giúp bảo toàn độ phân giải không gian mà vẫn cho phép dùng toán tử bit.
+
+
+
+2. Phép toán: Bitwise Geometric Transformation
+
+Va chạm (Collision) : Sử dụng cấu trúc Hash-Grid hoặc Morton Encoding. Khi hai vật thể được mã hóa thành chuỗi bit theo thứ tự không gian (Z-order curve), phép AND giữa hai chuỗi bit sẽ ngay lập tức xác định vùng không gian giao nhau
+
+Tịnh tiến (Translation): Trong GA, tịnh tiến là phép nhân sandwich với một Translator. Để làm bằng bit, ta định nghĩa lại không gian dưới dạng Logarithmic Number System (LNS). Khi đó, phép nhân (xoay/dịch) biến thành phép cộng/dịch bit đơn giản trên số mũ.
+
+Phép quay (Rotation): Thay vì dùng ma trận hay Sin/Cos, ta dùng các Rotor trong GA. Trên phần cứng chuyên dụng, phép nhân Rotor có thể được tối ưu hóa thành một chuỗi các phép XOR-Shift (tương tự như cách các thuật toán mã hóa AES hay SHA-256 hoạt động nhưng dành cho hình học).
+
+
+
+3. Phần cứng: The Geometric Processing Unit (XPU)
+
+Kiến trúc: Thay vì các nhân tính toán số thực (ALU), chip này chứa các Bit-Manipulation Units (BMU) khổng lồ có khả năng xử lý số nguyên 1024-bit hoặc 4096-bit trong một xung nhịp.
+
+Pipeline: Vật thể đi vào đường ống dưới dạng một "Dòng chảy bit" (Bit-stream). Các cổng logic thực hiện phép XOR (để xoay) và AND (để kiểm tra va chạm) ngay trên đường truyền mà không cần nạp vào RAM trung gian.
+
+Độ trễ: Vì không có bước giải mã số thực phức tạp, độ trễ sẽ ở mức Nano-giây.
