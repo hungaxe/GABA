@@ -1,6 +1,6 @@
 Tên đề án: GA-BitStream Architecture (GABA)
 
-Core Idea : Hình học n-chiều (1D -> nD) ---> Int + Logic Processing
+Core Idea : Hình học thực chất là Logic. Đưa hình học $n$-chiều ($1D \rightarrow nD$) về đúng ngôn ngữ bản địa của vật lý máy tính, toán tử Logic trên Luồng bit nguyên (Large Integer Bitstream) thông qua Đại số Geometric (Clifford).
 
 
 Cấu trúc tính toán hình học dựa trên Đại số Geometric (Clifford) và Luồng bit số nguyên lớn.
@@ -11,28 +11,35 @@ Cấu trúc tính toán hình học dựa trên Đại số Geometric (Clifford)
 
 Thay vì lưu tọa độ rời rạc, chúng ta sử dụng Geometric Algebra (GA). Trong GA, một vật thể không phải là tập hợp các điểm, mà là một Multivector.
 
-+ Mã hóa vật thể vào một chuỗi bit gọi là Sparse Multivector Bit-string.
++ Mã hóa bản thể: Một vật thể được biên dịch thẳng vào một Sparse Multivector Bit-string. Mỗi phân đoạn bit không chứa một "con số", mà nó chứa một "Blade" — đại diện trực tiếp cho các chiều không gian (điểm, đường, mặt, khối).
 
-+ Mỗi phân đoạn bit đại diện cho một "Blade" (điểm, đường, mặt, khối).
-
-+ Thay vì dùng số thực 32-bit (float), ta sử dụng Fixed-point arithmetic (số điểm cố định) được đóng gói vào một số nguyên cực lớn. Điều này giúp bảo toàn độ phân giải không gian mà vẫn cho phép dùng toán tử bit.
++ Sự toàn vẹn của độ phân giải: Bằng cách không dùng số thực 32-bit (float) vốn mang sai số nội tại và sử dụng Fixed-point Arithmetic đóng gói trong một số nguyên khổng lồ, ta giữ lại được sự hoàn hảo của tô-pô không gian. Hình học giờ đây có thể được thao tác ở cấp độ bit nguyên thủy.
 
 
 
-2. Phép toán: Bitwise Geometric Transformation ; Target là chuyển hết những phép xử lý quan trọng -> Logic
+2. Phép toán: Bitwise Geometric Transformation ; Động học là Phép toán Logic (Kinematics as Logic)
 
-Va chạm (Collision) : Sử dụng cấu trúc Hash-Grid hoặc Morton Encoding. Khi hai vật thể được mã hóa thành chuỗi bit theo thứ tự không gian (Z-order curve), phép AND giữa hai chuỗi bit sẽ ngay lập tức xác định vùng không gian giao nhau
+Idea : Biến đổi hình học thực chất chỉ là sự xáo trộn và khớp nối các cổng Logic. Mục tiêu là loại bỏ hoàn toàn các chu kỳ máy (clock cycles) lãng phí cho ALU (Arithmetic Logic Unit). Mọi tương tác vật lý phải được quy về các tập lệnh cơ bản nhất của phần cứng:
 
-Tịnh tiến (Translation): Trong GA, tịnh tiến là phép nhân sandwich với một Translator. Để làm bằng bit, ta định nghĩa lại không gian dưới dạng Logarithmic Number System (LNS). Khi đó, phép nhân (xoay/dịch) biến thành phép cộng/dịch bit đơn giản trên số mũ.
+Sự giao thoa (Collision) là Phép AND: Đặt không gian lên một đường cong Z-order (Morton Encoding), việc hai vật thể chạm nhau trong không gian $n$-chiều không cần những phương trình. Phép bitwise AND giữa hai chuỗi bit sẽ ngay lập tức "bật sáng" vùng không gian giao nhau.
 
-Phép quay (Rotation): Thay vì dùng ma trận hay Sin/Cos, ta dùng các Rotor trong GA. Trên phần cứng chuyên dụng, phép nhân Rotor có thể được tối ưu hóa thành một chuỗi các phép XOR-Shift (tương tự như cách các thuật toán mã hóa AES hay SHA-256 hoạt động nhưng dành cho hình học).
+Sự dịch chuyển (Translation) là Phép Bit-shift: Tịnh tiến bằng phép nhân sandwich (với Translator) trong GA có thể được bẻ gãy. Đưa hệ tọa độ về Logarithmic Number System (LNS), phép nhân không gian bị giáng cấp thành phép cộng, và trên phần cứng, nó trở thành một phép dịch bit (Shift) thuần túy.
 
 
+Sự uốn nắn (Rotation) là Phép XOR-Shift: Ma trận xoay và hàm $\sin$/$\cos$ là kẻ thù của hiệu năng. Trong GABA, ta sử dụng các Rotor. Khi ánh xạ xuống phần cứng, phép nhân Rotor biến thành các chuỗi XOR-Shift — thao tác định tuyến hình học ở tốc độ của các thuật toán mã hóa mật mã (như AES hay SHA-256).
 
-3. Phần cứng: The Geometric Processing Unit (XPU)
 
-Kiến trúc: Thay vì các nhân tính toán số thực (ALU), chip này chứa các Bit-Manipulation Units (BMU) khổng lồ có khả năng xử lý số nguyên 1024-bit hoặc 4096-bit trong một xung nhịp.
+3. Khái niệm "Dòng chảy" của Phần cứng (The Hardware Substrate)
 
-Pipeline: Vật thể đi vào đường ống dưới dạng một "Dòng chảy bit" (Bit-stream). Các cổng logic thực hiện phép XOR (để xoay) và AND (để kiểm tra va chạm) ngay trên đường truyền mà không cần nạp vào RAM trung gian.
+Idea : Vi xử lý không "tính toán" hình học, nó cho phép hình học "chảy" qua các cổng logic.
 
-Độ trễ: Vì không có bước giải mã số thực phức tạp, độ trễ sẽ ở mức Nano-giây.
+Đây là lúc hình thành nên XPU (The Geometric Processing Unit):
+
+Triệt tiêu ALU: Trái tim của XPU không phải là các nhân số thực, mà là các hạt nhân BMU (Bit-Manipulation Units) khổng lồ. Chúng sinh ra để nuốt trọn các số nguyên cực đại 1024-bit hoặc 4096-bit trong một xung nhịp duy nhất.
+
+
+Kiến trúc Bit-stream Pipeline: Vật thể trôi qua chip như một dòng chảy bit. Các cổng logic thực hiện phép xoay (XOR) và xét va chạm (AND) ngay trên đường bay của dữ liệu (in-flight processing) mà không cần trễ nhịp để đọc/ghi vào RAM trung gian.
+
+
+Vượt qua rào cản tốc độ: Vì toàn bộ khâu giải mã (decoding) và mã hóa (encoding) số thực đã bị xóa sổ, độ trễ của mọi thao tác hình học tiệm cận với giới hạn vật lý của dòng điện — ở mức nano-giây.
+
