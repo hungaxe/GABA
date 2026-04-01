@@ -1,5 +1,6 @@
 Tên đề án: GA-BitStream Architecture (GABA)
 
+Core Idea : Hình học n-chiều (1D -> nD) ---> Int + Logic Processing
 
 
 Cấu trúc tính toán hình học dựa trên Đại số Geometric (Clifford) và Luồng bit số nguyên lớn.
@@ -18,7 +19,7 @@ Thay vì lưu tọa độ rời rạc, chúng ta sử dụng Geometric Algebra (
 
 
 
-2. Phép toán: Bitwise Geometric Transformation
+2. Phép toán: Bitwise Geometric Transformation ; Target là chuyển hết những phép xử lý quan trọng -> Logic
 
 Va chạm (Collision) : Sử dụng cấu trúc Hash-Grid hoặc Morton Encoding. Khi hai vật thể được mã hóa thành chuỗi bit theo thứ tự không gian (Z-order curve), phép AND giữa hai chuỗi bit sẽ ngay lập tức xác định vùng không gian giao nhau
 
