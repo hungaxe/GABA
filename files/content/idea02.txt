@@ -1,1 +1,2 @@
+Nhiệm vụ không phải là phân tích đúng/sai — mà là thiết kế một hệ thống mới mà ở đó những điều bạn muốn trở thành sự thật bằng cách xây dựng (by construction). Để làm được điều này, tôi sẽ đặt câu hỏi ngược: Cần thiết kế encoding và operation như thế nào để XOR trên big-int LÀ geometric product theo nghĩa chính xác tuyệt đối, mà vẫn có độ phức tạp tương đương single-big-int1 XOR single-big-int2 (tính toán song song, ASIC,...) và độ chính xác cực mạnh của int ?
 
