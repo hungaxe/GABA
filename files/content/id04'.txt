@@ -1,0 +1,24 @@
+Tất cả đều là từ trực giác, suy nghĩ của cá nhân tôi, nếu nó là bất khả thi (vì vi phạm định luật nào đó đã được chứng minh từ trước) thì hãy chỉnh sửa đúng hướng cho tôi nhé, nhưng vẫn giữ lại những gì cốt lõi (để nó thật sự là novelty + revolutionary cho geometric computing); Hãy biến ý tưởng chưa rõ ràng  + linh cảm của tôi sang ý tưởng cực tốt và đủ nền tảng để bắt đầu viết whitepaper sao cho thật sự là cách mạng mạnh mẽ nhất trong 50 năm trở lại đây, quy mô toàn bộ geometric computing. Đừng để bản thân bị ảo giác, overclaim,...!
+
+Hãy để tôi cho bạn xem những gì tôi đã nhìn thấy trong chính tôi :
+
+Khi nhìn vào single-big-int, đúng vậy một số nguyên lớn và duy nhất (ex : 1101101110101). Nó có thể thực hiện các phép logic (XOR, AND, OR,...) hay các phép ADD/MUL và có thể song song hóa hoàn toàn, cực nhanh, tức thì, real-time.
+
+Khi nhìn sang lại hình học, thường là được biến thành một đống dữ liệu rời rạc để tính toán với độ phức tạp phụ thuộc vào n, độ chính xác cũng là dấu chấm hỏi;
+
+Vậy hóa ra tôi muốn có được tốc độ real-time cực mạnh và độ chính xác tuyệt đối của Single-big-int và áp dụng vào được gần như toàn bộ geometric computing, mà không có trade-off làm cho Project của tôi phá sản, phải duy trì được novelty + revolutionary. Tạo ra đột phá breakthough/paradigm shift về tính toán/độ chính xác trong geometric computing (là toàn ngành á, không phải niche impact).
+
+
+Hãy xem một ví dụ trực quan :
+
+Input : R^n (n-dimension)
+
+R^n -> Z (thỏa mãn các điều kiện khắt khe) ;
+
+Trong đó Z có Z_1, Z_2,...,Z_n () ; Và Z'_1, Z'_2,... là các lệnh "số";
+
+Target 1 : "bit ops (ALU)" trên Z'_1 và Z,... <=> AND/XOR/OR/... (ALU) <=> Geometric Product, Geometric Algebra, Geometric Computing. Mà không cần phải Z'_1 "bit ops" Z_1, Z'_1 "bit ops" Z_2,...,Z'_1 "bit ops" Z_n ;
+
+Tức là, thay vì lưu dữ liệu dưới dạng các "biến" (hoặc một kiểu biểu diễn nào đó) RỜI RẠC, chúng ta gộp chúng thành một số nguyên lớn duy nhất (single-big-int) Z, lưu ý rằng cách biểu diễn phải hợp lý để có thể thực hiện được các bước sau mà tôi sẽ nói. Và sau đó thiết lập một cách nào đó để phép tính cực kỳ đơn giản Z'_1 "bit ops" Z sẽ có thể THAY THẾ ĐƯỢC HOÀN TOÀN CÁC TÍNH NĂNG của Geometric Product, Geometric Algebra mà ĐỘ PHỨC TẠP, TÍNH KHẢ THI VÀ THẬT SỰ LÀ REVOLUTIONARY TRONG GEOMETRIC COMPUTING VÌ TỐC ĐỘ (int) (real-time in ASIC) VÀ ĐỘ CHÍNH XÁC (int);
+
+Và Không xảy ra các trade-off hay "đánh đổi" nào khiến cho Project của tôi không còn là novelty + game-changer/breakthough/revolutionary trong Geometric Computing tổng quát.
