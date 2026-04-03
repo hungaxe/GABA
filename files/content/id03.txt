@@ -1,1 +1,3 @@
-GA product ~ XOR-cost
+Target : GA product ~ XOR-cost
+
+More : cần thiết kế encoding và phép toán như thế nào để XOR trên big-int LÀ geometric product, với complexity đúng bằng single XOR? Sửa lại toàn bộ cách biểu diễn trên big-int như nào ?
