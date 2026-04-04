@@ -56,6 +56,6 @@ License : https://github.com/nahhididwin/Hungs/tree/main?tab=License-1-ov-file
 
 Repositories Public Date https://github.com/nahhididwin/GABA/ : (DD/MM/YYYY)
 
-WARNING : At the time of (DD/MM/YYYY), this work is an early-stage theoretical exploration developed independently by a student researcher. Due to practical constraints, the current version focuses on conceptual formulation and preliminary validation. The author welcomes feedback, critique, and collaboration from the community.
+WARNING : At the time of 04/04/2026 (DD/MM/YYYY), this work is an early-stage theoretical exploration developed independently by a student researcher. Due to practical constraints, the current version focuses on conceptual formulation and preliminary validation. The author welcomes feedback, critique, and collaboration from the community.
 
 
