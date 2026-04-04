@@ -52,7 +52,7 @@ Github : https://github.com/nahhididwin
 
 # License and Warning 
 
-License : https://github.com/nahhididwin/Hungs/tree/main?tab=License-1-ov-file
+License : https://github.com/nahhididwin/GABA/tree/main?tab=License-1-ov-file
 
 Repositories Public Date https://github.com/nahhididwin/GABA/ : (DD/MM/YYYY)
 
