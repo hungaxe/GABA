@@ -20,7 +20,7 @@ Geometric Algebra Big-integer Architecture: A Unified Integer Encoding for Multi
 
 **Recommended reading (Theory + IMPL):** 
 
-Alpha 1A : https://github.com/nahhididwin/GABA/blob/main/files/papers/GABA_Whitepaper.docx
+(04/04/2026 ; DD/MM/YYYY) Alpha 1A : https://github.com/nahhididwin/GABA/blob/main/files/papers/GABA_Whitepaper.docx
 
 **Idea** : https://github.com/nahhididwin/GABA/blob/main/files/content/id07.txt
 
