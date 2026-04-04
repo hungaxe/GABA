@@ -1,5 +1,5 @@
 # GABA
-
+Geometric Algebra Big-integer Architecture: A Unified Integer Encoding for Multivector Spaces and Geometric Operators
 
 ====================================
 
