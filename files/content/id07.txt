@@ -17,6 +17,23 @@ Mục tiêu :
 Một thứ tôi muốn bạn hình dung trước khi bắt đầu : Bạn có thể thấy, khi mà 1 single-big-int duy nhất có thể tính toán song song hoàn toàn với các phép logic, 
 bitwise, cộng trên phần cứng chuyên biệt. Giờ tôi có tham vọng rất lớn là làm sao để làm được điều tương tự với quy mô Geometric Product, 
 và nhiều thứ hơn thế nữa trong Geometric Computing? Nói thẳng ra tôi muốn có 1 ý tưởng cách mạng nào đó?
+Và thực tế thì động lực để tôi tin vào việc này đó là một góc nhìn của tôi :
+"
+Có lẽ bạn đã quá quen với thứ này : Input -> Processing -> Output ;
+Nhưng rốt cuộc "Processing" THẬT SỰ ĐỂ LÀM GÌ?
+Tôi thấy thường là dùng để nhiều Input có thể đem ra "so sánh" với nhau. Tức nó biến Input -> "Một thứ có thể đem ra so sánh với nhau".
+
+Example liên quan đến số :
+In_1 : 1 + 1 + 1
+Processing -> Output_1 : 3
+In_2 : 1 + 2
+Processing -> Output_2 : 3
+Compare : "3 = 3" => 1 + 1 + 1 = 1 + 2;
+(Tôi đoán đọc nó có thể giúp bạn thấy dễ hiểu hơn, nhưng cũng có thể khiến bản ngộ nhận? : mấy thứ khác như if/elif/else thực tế cũng là compare)
+
+Thực tế thì nhiều thứ khác trừu tượng hơn, tôi thấy đa số bản chất đều thế.
+Vậy thì hẳn là tôi phải tìm cách nào đó để có thể đem Input ra so sánh với nhau, xử lý trước qua 1 bước "Process" mà bước này càng tốt thì càng có giá trị?
+"
 
 
 **Kiến trúc :**
