@@ -24,8 +24,7 @@ Geometric Algebra Big-integer Architecture: A Unified Integer Encoding for Multi
 
 Supplement : https://github.com/nahhididwin/GABA/blob/main/files/papers/gaba_supplement.js
 
-**Core Idea** : https://github.com/nahhididwin/GABA/blob/main/files/content/id07.txt
-
+**Core Idea** : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt
 
 ====================================
 
