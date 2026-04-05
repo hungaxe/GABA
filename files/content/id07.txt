@@ -73,6 +73,8 @@ Thứ tư: ⊛ Là Gì?
 
 Nhìn chung tôi mong muốn ⊛ có độ phức tạp thấp, càng thấp nó sẽ càng là Revolutionary. Kỳ vọng độ phức tạp là tầm XOR/AND trên toàn bộ int hoặc Cộng trên toàn int (song song hoàn toàn). Tôi có tham vọng tạo ra một toán tử phần cứng ⊛ chạy trong 1 cycle (hoặc pipeline rất ngắn) trên ASIC. Nên nhớ rằng nó là một phép toán hoàn toàn khác, chỉ có điều là nó làm được những công dụng của Geometric Product, chứ không phải rút gọn Geometric Product -> độ phức tạp tầm bitwise. Tuy nhiên Geometric Product vẫn có thể tối ưu tiếp, nên tôi sẽ thử.
 
+Tuy vậy nhưng có thể để khiến ⊛, Operator Integer Z', Single Big Integer (Z) trở nên khả thi và thật sự revolutionary, có thể chúng ta chỉ có thể tham khảo Geometric Algebra, và phải làm lại tất cả từ đầu, một kiểu trình bày thông tin mới?
+
 
 Lưu ý : Tôi biết nó trông vô cùng tham vọng, nhưng tôi chỉ mong muốn tìm ra được ý tưởng thật sự tốt và mới, biết đâu lại là revolutionary.
 
