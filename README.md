@@ -21,6 +21,7 @@ Geometric Algebra as Big-integer Algebra
 
 **Recommended reading (Theory + IMPL):** 
 
+Alpha 1b : https://github.com/nahhididwin/GABA/blob/main/files/papers/paper1b.docx
 
 **Core Idea** : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt
 
