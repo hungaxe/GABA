@@ -1,1 +1,185 @@
+05/04/2026 (DD/MM/YYYY)
 
+Thật sự giống như đi trên đường dây điện, khi mà chỉ cần hiểu nhầm một tý ý tưởng của tôi thôi cũng có thể xảy ra sự hiểu lầm tai hại? Hy vọng bạn đọc thật kỹ và liên hệ nó với thực tế để tránh hiểu lầm ? :
+
+Trước tiên, bản đồ kiến trúc tổng thể:
+GABA: Geometric Algebra as Big-integer Algebra
+Kiến trúc 4 tầng — từ coefficient đến toàn bộ scene
+
+Tầng 0 — Coefficient Field
+f-bit integer (exact, no float) ← đơn vị nhỏ nhất
+
+---pack 2ⁿ fields---> Tầng 1 — GInt (một geometric object)
+[ a₀ | a₁ | a₂ | ··· | a_{2ⁿ−1} ] = Z_A
+f · 2ⁿ bits — mỗi slot = 1 blade coefficient (integer)
+
+---pack M objects---> Tầng 2 — SInt (toàn bộ scene)
+[ Z_A | Z_B | Z_C | ··· | Z_M ] = Z_scene
+M · f · 2ⁿ bits — toàn bộ không gian hình học = 1 intege
+
+---⊛---Z′ — OInt (operator)
+2ⁿ × 2ⁿ × f bits
+
+--->Tầng 3 — Kết quả
+Z′ ⊛ Z_scene → Z_result (cùng format SInt)
+toàn bộ M objects được transform cùng lúc
+
+---->PIT — Product-Index Table
+PIT[i][j] = (i XOR j, sign_ij)
+bảng cố định theo geometry type
+
+
+---->ASIC — ⊛ pipeline
+N multiply units ‖ log(N) adder stages
+fixed latency, không đổi dù M = 10⁶
+
+
+Key:
+⊛ = integer matrix-vector product (NOT geometric product)
+PIT thay thế hoàn toàn axiom của GA — geometry type = table, không phải abstract algebra
+
+Bây giờ là toàn bộ hệ toán học, xây từ nền:
+
+§0 — Điểm xuất phát: Tại sao không phải GA?
+Geometric Algebra định nghĩa đối tượng qua axiom trừu tượng (eᵢeⱼ + eⱼeᵢ = 2δᵢⱼ), rồi mới ánh xạ xuống phần cứng. GABA đảo ngược hoàn toàn: integer encoding là định nghĩa gốc, không phải triển khai phụ. Geometry không phải thứ chúng ta tính — geometry là cấu trúc của integer.
+
+GABA — integer-first
+PIT (table) → Integer Encoding → Operation ⊛ → Algebra sinh ra từ đây
+
+§1 — Product-Index Table (PIT): Nền tảng thay axiom
+Thay vì viết axiom, ta định nghĩa một bảng số nguyên cố định cho từng loại hình học.
+
+Định nghĩa 1.1 — Geometric Type
+Một Geometric Type T(n, σ) được xác định hoàn toàn bởi:
+  • n ∈ ℕ : số chiều cơ sở
+  • σ : {0,...,2ⁿ-1}² → {0,...,2ⁿ-1} × {−1, 0, 1} : Product-Index Table
+
+σ(i, j) = (i ⊕ j, s_ij)  trong đó s_ij ∈ {−1, 0, 1} là hệ số dấu.
+
+Lưu ý quan trọng: σ là bảng có kích thước 4ⁿ entries, cố định khi chọn geometry. Với n=5 (CGA 3D): 1024 entries — fit vào L1 cache.
+
+
+σ_Euclid3D(i, j) = (i ⊕ j, (−1)^{swap(i,j)}) σ_CGA3D (i, j) = (i ⊕ j, (−1)^{swap(i,j)} · metric(i,j)) σ_PGA3D (i, j) = (i ⊕ j, (−1)^{swap(i,j)} · proj_factor(i,j))
+Phần i ⊕ j (XOR của blade-index) là không đổi với mọi geometry. Chỉ khác nhau ở bảng dấu s_ij — đây là "gen" của từng hình học.
+
+Hệ quả 1.2 — Không gian blade
+Với n chiều: có đúng 2ⁿ "atomic slots" (blade index ∈ {0,...,2ⁿ-1}). Blade index i là bitmask: bit k bật ⟺ e_k xuất hiện trong blade đó. Đây không phải convention mượn từ GA — đây là định nghĩa gốc của GABA.
+
+
+
+
+
+
+§2 — Geometric Integer (GInt): Object = Big Integer
+Định nghĩa 2.1 — GInt
+Với Geometric Type T(n, σ) và field-width f bits:
+
+GInt_T là số nguyên có chính xác f·2ⁿ bits, chia thành 2ⁿ field mỗi cái f bits:
+
+  Z_A = [ a_{2ⁿ-1} | ··· | a_1 | a_0 ] (mỗi aᵢ ∈ ℤ, stored as f-bit signed integer)
+
+Coefficient aᵢ = "tọa độ" của blade-index i trong object A. Integer chính xác tuyệt đối.
+Ví dụ n=3, f=16: Z_A = [ a_7 | a_6 | a_5 | a_4 | a_3 | a_2 | a_1 | a_0 ] ←──────────────── 128 bits tổng ───────────────────→ a_0 = scalar part a_1 = e₁ coefficient (blade {1} = 0b001) a_2 = e₂ coefficient (blade {2} = 0b010) a_3 = e₁∧e₂ coefficient (blade {1,2} = 0b011) ...
+Guard bits = f-bit zero padding giữa các field → tràn số = zero boundary, không corrupted.
+
+
+
+
+§3 — SInt: Toàn bộ Scene = 1 Integer
+Định nghĩa 3.1 — SInt (Space Integer)
+SInt là số nguyên encode toàn bộ M objects trong một scene:
+
+  Z = [ Z_{M-1} | ··· | Z_1 | Z_0 ]
+
+Kích thước: M · f · 2ⁿ bits. Đây là "trải phẳng" mà bạn mô tả — nD → 1D về mặt biểu diễn.
+Insight của bạn về "compare" ánh xạ trực tiếp vào đây: hai scene hình học học tương đương ⟺ SInt của chúng bằng nhau (sau canonical form). Geometric equality = integer equality.
+
+
+
+
+§4 — Operator Integer (OInt / Z′): Transformation = Integer
+Ý tưởng cốt lõi Mọi phép biến đổi hình học tuyến tính (rotation, reflection, projection, scaling...) đều là linear map trên không gian 2ⁿ chiều của GInt. Linear map = ma trận nguyên. Ma trận = big integer.
+
+Định nghĩa 4.1 — OInt
+Z′ là số nguyên encode ma trận M ∈ ℤ^{2ⁿ × 2ⁿ}:
+
+  Z′ = [ m_{2ⁿ-1, 2ⁿ-1} | ··· | m_{0,1} | m_{0,0} ]
+
+Kích thước: 4ⁿ · f bits (ví dụ n=5, f=16: 16384 bits = 2KB — nhỏ hơn cache line điển hình!)
+
+Một rotor (rotation) trong Euclidean 3D: n=3, Z′ = 512 bits.
+Tính chất 4.2 — Operator Composition = Integer Multiplication
+Cho Z′₁, Z′₂ là hai operator:
+
+  Z′_{compose} = Z′₁ ⊗_mat Z′₂   (matrix multiplication trên 2ⁿ×2ⁿ integers)
+
+Kết quả: Z′_{compose} ⊛ Z = Z′₁ ⊛ (Z′₂ ⊛ Z) cho mọi GInt Z.
+
+Hệ quả cực mạnh: Pre-compose 1000 transformations offline → 1 OInt duy nhất → apply 1 lần vào 10⁶ objects.
+
+
+
+
+
+§5 — Phép toán ⊛: Định nghĩa chính xác
+Trung tâm của GABA ⊛ không phải geometric product. Có hai dạng:
+
+5a — Object-Object ⊛ (PIT-Convolution)
+Khi kết hợp hai GInt (giống geometric product về công dụng, nhưng khác về định nghĩa):
+
+(A ⊛_T B)_k = Σ_{σ(i,j).index = k} σ(i,j).sign · A_i · B_j Trong đó: k chạy từ 0 đến 2ⁿ−1
+Đây là convolution trên group (ℤ/2)ⁿ với dấu từ PIT. Cấu trúc quan trọng: index part là XOR (hoàn toàn parallel), sign part là lookup cố định (baked vào ASIC).
+
+5b — Operator-Object ⊛ (Matrix-Vector)
+(Z′ ⊛ Z_A)_k = Σ_{j=0}^{2ⁿ-1} Z′[k][j] · (Z_A)_j = integer matrix-vector product (exact, no float)
+5c — Operator-Scene ⊛ (Broadcast)
+Z′ ⊛ Z_scene = [ Z′ ⊛ Z_0 | Z′ ⊛ Z_1 | ··· | Z′ ⊛ Z_{M-1} ] = apply operator đến MỌI objects trong scene đồng thời
+Tính chất 5.1 — Độ phức tạp
+Sequential: O(4ⁿ) multiply-adds
+ASIC parallel: O(2ⁿ) multiply units ‖ O(n) adder-tree stages ≈ O(n) cycles
+Binary case (coefficients ∈ {0,1}): multiply → AND, add → OR ⟹ XOR/AND complexity!
+
+Binary case applicable for: incidence queries, intersection detection, topology, CSG.
+
+Lưu ý quan trọng: ⊛ không "rút gọn geometric product thành XOR". ⊛ là một phép toán mới; binary case là trường hợp đặc biệt thực sự XOR/AND, không phải ép buộc.
+
+
+§6 — Geometric Type Polymorphism: Điều GA không có
+Trong GA, bạn chọn 1 algebra cố định cho cả project. Trong GABA:
+
+Định nghĩa 6.1 — Type Cast
+Một Type Cast C: T(n, σ₁) → T(n, σ₂) là một integer transform đưa GInt từ geometry này sang geometry khác:
+
+  Z_B = C ⊛ Z_A
+
+Ví dụ: promote Euclidean 3D rotation → CGA 3D rotor = type cast bằng một OInt cố định.
+
+Hệ quả: Switching between Euclidean, Projective, Conformal, Hyperbolic geometry = thay PIT + apply one OInt. Cùng một ASIC, cùng ⊛ operation.
+
+
+
+§7 — GABA Axioms: Hệ tiên đề mới (thay GA)
+Thay vì axiom eᵢeⱼ + eⱼeᵢ = 2δᵢⱼ, GABA có:
+
+Axiom G1 (Index closure): σ(i,j).index = i ⊕ j (XOR — cố định với mọi T) Axiom G2 (Sign antisymmetry): s_ij = −s_ji khi i ≠ j (generalized anticommutativity) Axiom G3 (Associativity): (A ⊛ B) ⊛ C = A ⊛ (B ⊛ C) [provable from PIT structure] Axiom G4 (Integer exactness): mọi coefficient ∈ ℤ, không có xấp xỉ Axiom G5 (Distributivity): A ⊛ (B +_Z C) = (A ⊛ B) +_Z (A ⊛ C) trong đó +_Z là cộng field-wise trên GInt
+Hệ quả của G1+G2: Grade structure xuất hiện tự nhiên từ bitmask, không cần define thêm. Grade của blade i = popcount(i) = số bit 1 trong index i.
+
+
+
+§8 — ASIC Architecture: Hardware cho ⊛
+Pipeline cho Z′ ⊛ Z_A (n=5, N=32 blades): Stage 1: 32×32 parallel multiply units → 1024 products (1 cycle, fully parallel) Stage 2: 1024 → 512 adder-with-sign → apply s_ij signs (1 cycle, lookup table) Stage 3: 512 → 256 adder tree → reduce by XOR-index grouping (1 cycle) Stage 4: 256 → 128 → (1 cycle) Stage 5: 128 → 64 → (1 cycle) Stage 6: 64 → 32 → final 32 outputs (1 cycle) Total: 6 pipeline stages ≈ 6 cycles PIT (sign table): 1024 bits = baked vào wiring của ASIC
+Với ASIC specialized: 1 rotation/reflection/projection trong ~6 cycles, không phụ thuộc vào số lượng objects M (broadcast).
+
+
+§9 — Những gì thực sự cần nghiên cứu tiếp
+Câu hỏi mở 1 — Canonical Form
+Tồn tại canonical form cho GInt không? Tức là có thuật toán reduce Z_A → Z_canonical(A) sao cho A ≡ B về mặt hình học ⟺ Z_canonical(A) = Z_canonical(B)?
+Câu hỏi mở 2 — Sparse OInt
+Với rotors/versors trong GA, ma trận tương ứng RẤT sparse (nhiều zero). Tìm cấu trúc thưa của Z′ để giảm 4ⁿ → k ≪ 4ⁿ multiply operations thực sự cần thiết.
+Câu hỏi mở 3 — Binary GABA
+Binary GABA (coefficients ∈ {0,1}) với ⊛ = AND+OR thực sự là một algebraic structure mới. Nó có những geometric invariants nào? Ứng dụng: collision detection, topological computing.
+Câu hỏi mở 4 — Compression của SInt
+SInt có thể rất lớn. Tìm lossy/lossless compression C: SInt → SInt′ sao cho các queries hình học quan trọng vẫn trả lời được từ SInt′.
+
+
+Câu hỏi mở quan trọng nhất là Sparse OInt — nếu chứng minh được rằng mọi rotor/versor có sparse matrix representation với k ≪ 4ⁿ non-zero entries, thì độ phức tạp thực sự giảm xuống rất gần XOR territory. Đây là nơi "revolutionary" có thể được chứng minh hoặc bác bỏ về mặt toán học.
