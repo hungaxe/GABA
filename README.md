@@ -23,9 +23,11 @@ Geometric Algebra as Big-integer Algebra
 
 Beta 2.0 : https://github.com/nahhididwin/GABA/blob/main/files/papers/paper2.docx
 
+**Core Idea** : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt
+
+
 Alpha 1b : https://github.com/nahhididwin/GABA/blob/main/files/papers/paper1b.docx
 
-**Core Idea** : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt
 
 ====================================
 
