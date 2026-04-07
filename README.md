@@ -20,12 +20,16 @@ Geometric Algebra as Big-integer Algebra
 
 **Recommended reading (Theory + IMPL):** 
 
-Beta 2.0 : https://github.com/nahhididwin/GABA/blob/main/files/papers/paper2.docx
+**Beta 2.0 :**
 
-**Core Idea** : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt
+(Main paper) https://github.com/nahhididwin/GABA/blob/main/files/papers/paper2.docx ;
+
+(Supplement) https://github.com/nahhididwin/GABA/blob/main/files/papers/suppleforpaper2.docx ;
+
+**Core Idea** : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt ;
 
 
-Alpha 1b : https://github.com/nahhididwin/GABA/blob/main/files/papers/paper1b.docx
+Alpha 1b : https://github.com/nahhididwin/GABA/blob/main/files/papers/paper1b.docx ;
 
 
 ====================================
