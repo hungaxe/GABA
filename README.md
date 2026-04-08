@@ -1,5 +1,5 @@
 # GABA
-Geometric Algebra as Big-integer Algebra
+Geometric Algebra as Big-integer Algebra, and Binary GABA ↔ Simplicial Homology
 
 
 ====================================
