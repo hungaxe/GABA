@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GABA – Bài Giảng Toàn Diện Từ Bản Chất</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg2: #f8f7f4;
+    --bg3: #f0ede6;
+    --text: #1a1a1a;
+    --text2: #444;
+    --text3: #777;
+    --accent: #2563eb;
+    --accent2: #7c3aed;
+    --accent3: #0f766e;
+    --accent4: #b45309;
+    --border: #e0ddd6;
+    --red: #dc2626;
+    --green: #16a34a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a1a;
+      --bg2: #222;
+      --bg3: #2a2a2a;
+      --text: #f0ede6;
+      --text2: #ccc;
+      --text3: #888;
+      --accent: #60a5fa;
+      --accent2: #a78bfa;
+      --accent3: #2dd4bf;
+      --accent4: #fbbf24;
+      --border: #333;
+      --red: #f87171;
+      --green: #4ade80;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; font-weight: 700; color: var(--accent2); margin-bottom: 0.5rem; line-height: 1.3; }
+  h2 { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin: 3rem 0 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.4rem; }
+  h3 { font-size: 1.15rem; font-weight: 700; color: var(--accent2); margin: 2rem 0 0.6rem; }
+  h4 { font-size: 1rem; font-weight: 700; color: var(--accent3); margin: 1.5rem 0 0.4rem; }
+  p { margin-bottom: 1rem; color: var(--text); }
+  .subtitle { color: var(--text3); font-size: 1rem; margin-bottom: 2rem; }
+  .toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem 2rem; margin: 2rem 0; }
+  .toc h3 { margin-top: 0; color: var(--text); }
+  .toc ol { padding-left: 1.5rem; }
+  .toc li { margin: 0.3rem 0; color: var(--accent); }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .box { border-radius: 10px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-left: 4px solid; }
+  .box-def { background: #eff6ff; border-color: var(--accent); }
+  .box-thm { background: #f5f3ff; border-color: var(--accent2); }
+  .box-proof { background: var(--bg2); border-color: var(--border); }
+  .box-eg { background: #f0fdf4; border-color: var(--green); }
+  .box-warn { background: #fef3c7; border-color: var(--accent4); }
+  .box-insight { background: #fdf4ff; border-color: var(--accent2); }
+  .box-corr { background: #fef2f2; border-color: var(--red); }
+  @media (prefers-color-scheme: dark) {
+    .box-def { background: #1e2a3a; }
+    .box-thm { background: #1e1a2e; }
+    .box-proof { background: var(--bg2); }
+    .box-eg { background: #0f2a1a; }
+    .box-warn { background: #2a2010; }
+    .box-insight { background: #1e1228; }
+    .box-corr { background: #2a1010; }
+  }
+  .label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+  .lbl-def { color: var(--accent); }
+  .lbl-thm { color: var(--accent2); }
+  .lbl-proof { color: var(--text3); }
+  .lbl-eg { color: var(--green); }
+  .lbl-warn { color: var(--accent4); }
+  .lbl-insight { color: var(--accent2); }
+  .lbl-corr { color: var(--red); }
+  .math-block { overflow-x: auto; padding: 0.8rem 0; }
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  th { background: var(--bg3); color: var(--text2); padding: 0.5rem 0.8rem; border: 1px solid var(--border); font-weight: 600; }
+  td { padding: 0.45rem 0.8rem; border: 1px solid var(--border); color: var(--text2); }
+  tr:nth-child(even) td { background: var(--bg2); }
+  code { background: var(--bg3); padding: 0.1em 0.4em; border-radius: 4px; font-family: monospace; font-size: 0.9em; color: var(--accent3); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .step { counter-increment: step; }
+  .callout { display: flex; gap: 0.8rem; align-items: flex-start; background: var(--bg2); border-radius: 8px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+  .callout-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { margin: 0.3rem 0; }
+  .section-num { color: var(--text3); margin-right: 0.3rem; }
+  .tag { display: inline-block; font-size: 0.75rem; padding: 0.1em 0.5em; border-radius: 4px; font-weight: 600; }
+  .tag-new { background: #dcfce7; color: #166534; }
+  .tag-corr { background: #fee2e2; color: #991b1b; }
+  .tag-open { background: #fef3c7; color: #92400e; }
+  @media (prefers-color-scheme: dark) {
+    .tag-new { background: #14532d; color: #86efac; }
+    .tag-corr { background: #7f1d1d; color: #fca5a5; }
+    .tag-open { background: #451a03; color: #fde68a; }
+  }
+  .sim-table { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin: 1rem 0; font-size: 0.88rem; }
+  .sim-row { display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid var(--border); }
+  .sim-row:last-child { border-bottom: none; }
+  .pass { color: var(--green); font-weight: 700; }
+  .fail { color: var(--red); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<h1>GABA: Geometric Algebra as Big-Integer Algebra</h1>
+<p class="subtitle">Bài giảng toàn diện từ bản chất — dành cho học sinh lớp 12<br>
+Dựa trên 2 bài báo gốc của Hung Dinh Phu Dang (tháng 4/2026)</p>
+
+<div class="toc">
+  <h3>Mục lục</h3>
+  <ol>
+    <li><a href="#s1">Vì sao cần GABA? Bài toán đặt ra</a></li>
+    <li><a href="#s2">Nền tảng 1: Vectơ và các phép nhân hình học</a></li>
+    <li><a href="#s3">Nền tảng 2: Đại số Clifford — ngôn ngữ thống nhất của hình học</a></li>
+    <li><a href="#s4">Framework GABA: Mã hóa hình học bằng số nguyên</a></li>
+    <li><a href="#s5">5 Tiên đề GABA và chứng minh</a></li>
+    <li><a href="#s6">Bổ đề Trung thực (Faithfulness Lemma)</a></li>
+    <li><a href="#s7">Định lý Sparsity Vandermonde</a></li>
+    <li><a href="#s8">Tăng trưởng hệ số và 3 giải pháp</a></li>
+    <li><a href="#s9">Binary GABA và đại số topo</a></li>
+    <li><a href="#s10">Dạng chuẩn (Canonical Form)</a></li>
+    <li><a href="#s11">Kết nối với Hình học Tính toán</a></li>
+    <li><a href="#s12">Phân tích phần cứng ASIC</a></li>
+    <li><a href="#s13">GABA có thực sự "cách mạng" không?</a></li>
+  </ol>
+</div>
+
+<!-- ======================== SECTION 1 ======================== -->
+<h2 id="s1"><span class="section-num">1.</span> Vì sao cần GABA? Bài toán đặt ra</h2>
+
+<p>Trước khi vào toán, hãy hiểu <em>vì sao</em> người ta phát minh ra GABA.</p>
+
+<h3>1.1 Hai vấn đề cốt lõi trong lập trình đồ họa và robot</h3>
+
+<p>Khi bạn làm game 3D, thiết kế robot, hay vẽ đồ họa máy tính, bạn liên tục cần:</p>
+<ul>
+  <li><strong>Xoay, dịch chuyển, chiếu</strong> hàng triệu điểm, đường thẳng, mặt phẳng trong không gian.</li>
+  <li><strong>Kiểm tra va chạm</strong>: hai vật có chạm nhau không? Điểm có nằm trong hình cầu không?</li>
+</ul>
+
+<p>Vấn đề 1: <strong>Sai số dấu phảy động (floating-point error).</strong> Máy tính lưu số thực như <code>0.1</code> không chính xác hoàn toàn — nó chỉ xấp xỉ. Sau hàng trăm phép nhân/chia liên tiếp, sai số tích lũy. Hậu quả: robot đi lạc đường, đa giác trong game bị "hở". Đây là thảm họa kỹ thuật thực sự.</p>
+
+<p>Vấn đề 2: <strong>Truy cập bộ nhớ không đều.</strong> CPU/GPU hiện đại mạnh nhất khi xử lý dữ liệu <em>liên tiếp, có cấu trúc đều đặn</em>. Các thư viện đại số hình học truyền thống lưu đối tượng dưới dạng mảng số thực rải rác — không tận dụng được SIMD/ASIC song song hóa.</p>
+
+<div class="box box-insight">
+  <div class="label lbl-insight">Ý tưởng cốt lõi của GABA</div>
+  <p><strong>Thay vì dùng số thực, hãy dùng số nguyên.</strong> Thay vì lưu mỗi đối tượng hình học là một mảng rời rạc, hãy gói toàn bộ vào một <em>số nguyên lớn duy nhất</em>. Thay vì tra bảng nhân phức tạp, hãy dùng <em>phép XOR</em> (một trong những phép toán nhanh nhất của CPU).</p>
+</div>
+
+<h3>1.2 Nguyên lý Xử lý-là-So sánh (PCP)</h3>
+
+<p>Paper đặt ra một triết lý gọi là <em>Processing-as-Comparison Principle</em>:</p>
+<blockquote style="border-left: 3px solid var(--border); padding-left: 1rem; color: var(--text2); margin: 1rem 0;">
+  "Mục đích cuối cùng của mọi pipeline xử lý là biến đổi đầu vào thành dạng phù hợp để <em>so sánh</em>. Hai biểu thức \(1+1+1\) và \(1+2\) được coi là bằng nhau nếu và chỉ nếu chúng bằng cùng số nguyên 3."
+</blockquote>
+<p>Áp dụng vào hình học: hai cảnh A và B hình học tương đương ⟺ các SInt chuẩn của chúng bằng nhau. Điều này rút gọn bài toán so sánh hình học thành <strong>một phép so sánh số nguyên duy nhất</strong> — một lệnh máy duy nhất!</p>
+
+<!-- ======================== SECTION 2 ======================== -->
+<h2 id="s2"><span class="section-num">2.</span> Nền tảng 1: Vectơ và các phép nhân hình học</h2>
+
+<h3>2.1 Vectơ cơ bản</h3>
+<p>Bạn đã biết vectơ là một mũi tên trong không gian, ví dụ \(\mathbf{v} = (x, y, z)\) trong 3D. Không gian 3D có 3 vectơ cơ sở:</p>
+<div class="math-block">$$\mathbf{e}_1 = (1,0,0), \quad \mathbf{e}_2 = (0,1,0), \quad \mathbf{e}_3 = (0,0,1)$$</div>
+<p>Mọi vectơ đều viết được dưới dạng: \(\mathbf{v} = v_1 \mathbf{e}_1 + v_2 \mathbf{e}_2 + v_3 \mathbf{e}_3\)</p>
+
+<h3>2.2 Tích vô hướng (Dot product) — đo "mức độ cùng hướng"</h3>
+<div class="math-block">$$\mathbf{u} \cdot \mathbf{v} = u_1 v_1 + u_2 v_2 + u_3 v_3 = |\mathbf{u}||\mathbf{v}|\cos\theta$$</div>
+<p>Kết quả là một <em>số vô hướng</em> (scalar). Tích vô hướng nói cho bạn biết hai vectơ "cùng hướng" đến mức nào, nhưng không cho bạn biết thông tin về mặt phẳng chứa chúng.</p>
+
+<h3>2.3 Tích có hướng (Cross product) — chỉ dùng được trong 3D!</h3>
+<div class="math-block">$$\mathbf{u} \times \mathbf{v} = \begin{vmatrix}\mathbf{e}_1 & \mathbf{e}_2 & \mathbf{e}_3 \\ u_1 & u_2 & u_3 \\ v_1 & v_2 & v_3\end{vmatrix}$$</div>
+<p>Kết quả là một <em>vectơ</em> vuông góc với cả hai. Nhưng cross product chỉ tồn tại trong 3D — không thể dùng trong 2D, 4D, hay không gian conformal (sẽ giải thích sau).</p>
+
+<div class="box box-warn">
+  <div class="label lbl-warn">Hạn chế của các phép nhân truyền thống</div>
+  <ul>
+    <li>Dot product trả về scalar — mất thông tin hướng.</li>
+    <li>Cross product chỉ dùng được trong 3D, không tổng quát hóa được.</li>
+    <li>Ma trận xoay cần 9 số cho 3D, phức tạp, dễ tích lũy sai số.</li>
+    <li>Quaternion (số phức 4 chiều) giải được bài xoay 3D nhưng không tổng quát.</li>
+  </ul>
+  <p>→ Người ta cần một <strong>phép nhân duy nhất, tổng quát cho mọi chiều</strong>. Đó là lý do ra đời của Đại số Clifford.</p>
+</div>
+
+<h3>2.4 Ý tưởng của Clifford: Tích hình học (Geometric product)</h3>
+<p>William Kingdon Clifford (1878) đề xuất: thay vì phân tách thành hai tích riêng biệt, hãy định nghĩa một <strong>tích hình học duy nhất</strong>:</p>
+<div class="math-block">$$\mathbf{u}\mathbf{v} = \mathbf{u}\cdot\mathbf{v} + \mathbf{u}\wedge\mathbf{v}$$</div>
+<p>Trong đó:</p>
+<ul>
+  <li>\(\mathbf{u}\cdot\mathbf{v}\) = phần đối xứng (symmetric part) = tích vô hướng</li>
+  <li>\(\mathbf{u}\wedge\mathbf{v}\) = phần phản đối xứng (antisymmetric part) = tích ngoài (outer/wedge product)</li>
+</ul>
+<p>Tích ngoài \(\mathbf{u}\wedge\mathbf{v}\) là một <strong>bivector</strong> — đại diện cho mặt phẳng được căng ra bởi \(\mathbf{u}\) và \(\mathbf{v}\). Nó tổng quát hóa được trong mọi chiều!</p>
+
+<!-- ======================== SECTION 3 ======================== -->
+<h2 id="s3"><span class="section-num">3.</span> Nền tảng 2: Đại số Clifford</h2>
+
+<h3>3.1 Luật cơ bản của các vectơ cơ sở</h3>
+<p>Clifford đặt ra hai luật cơ bản cho các vectơ cơ sở \(\mathbf{e}_i\):</p>
+
+<div class="box box-def">
+  <div class="label lbl-def">Luật Clifford cơ bản</div>
+  <div class="math-block">$$\mathbf{e}_i^2 = \varepsilon_i \quad \text{(số thực, thường là +1, -1, hoặc 0)}$$</div>
+  <div class="math-block">$$\mathbf{e}_i \mathbf{e}_j = -\mathbf{e}_j \mathbf{e}_i \quad \text{khi } i \neq j \quad \text{(phản giao hoán)}$$</div>
+  <p>Hay viết gọn: \(\mathbf{e}_i \mathbf{e}_j + \mathbf{e}_j \mathbf{e}_i = 2\delta_{ij}\varepsilon_i\)</p>
+</div>
+
+<p>Ký hiệu \(\varepsilon_i \in \{+1, -1, 0\}\) gọi là <strong>metric signature</strong> (chữ ký metric). Nó cho biết:</p>
+<ul>
+  <li>\(\varepsilon_i = +1\): không gian Euclide thông thường (như trục x, y, z)</li>
+  <li>\(\varepsilon_i = -1\): không gian hyperbolic (dùng trong vật lý tương đối)</li>
+  <li>\(\varepsilon_i = 0\): chiều null (dùng trong CGA — Conformal Geometric Algebra)</li>
+</ul>
+
+<h3>3.2 Blade — đơn vị cơ bản của đại số Clifford</h3>
+<p>Từ các vectơ cơ sở \(\mathbf{e}_0, \mathbf{e}_1, \ldots, \mathbf{e}_{n-1}\), ta tạo ra tất cả các tích có thể:</p>
+
+<table>
+  <tr><th>Tên</th><th>Ký hiệu</th><th>Ví dụ (n=3)</th><th>Grade (bậc)</th><th>Số lượng</th></tr>
+  <tr><td>Scalar</td><td>1</td><td>1</td><td>0</td><td>\(\binom{3}{0}=1\)</td></tr>
+  <tr><td>Vector</td><td>\(\mathbf{e}_i\)</td><td>\(\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3\)</td><td>1</td><td>\(\binom{3}{1}=3\)</td></tr>
+  <tr><td>Bivector</td><td>\(\mathbf{e}_i\mathbf{e}_j\)</td><td>\(\mathbf{e}_{12}, \mathbf{e}_{13}, \mathbf{e}_{23}\)</td><td>2</td><td>\(\binom{3}{2}=3\)</td></tr>
+  <tr><td>Pseudoscalar</td><td>\(\mathbf{e}_{ij\ldots}\)</td><td>\(\mathbf{e}_{123}\)</td><td>3</td><td>\(\binom{3}{3}=1\)</td></tr>
+</table>
+
+<p>Tổng cộng: \(1+3+3+1 = 8 = 2^3\) phần tử cơ sở. Với \(n\) chiều: luôn có \(2^n\) blade cơ sở.</p>
+
+<div class="box box-eg">
+  <div class="label lbl-eg">Ví dụ: Nhân hai vectơ trong 3D Euclide</div>
+  <p>Tính \(\mathbf{e}_1 \mathbf{e}_2\):</p>
+  <div class="math-block">$$\mathbf{e}_1 \mathbf{e}_2 = -\mathbf{e}_2 \mathbf{e}_1 \quad \text{(phản giao hoán)}$$</div>
+  <p>Tính \(\mathbf{e}_1 \mathbf{e}_1\):</p>
+  <div class="math-block">$$\mathbf{e}_1 \mathbf{e}_1 = \mathbf{e}_1^2 = \varepsilon_1 = +1 \quad \text{(trong Euclide)}$$</div>
+  <p>Tính \((\mathbf{e}_1 \mathbf{e}_2)(\mathbf{e}_2 \mathbf{e}_3)\):</p>
+  <div class="math-block">$$\mathbf{e}_1 \underbrace{\mathbf{e}_2 \mathbf{e}_2}_{=+1} \mathbf{e}_3 = \mathbf{e}_1 \mathbf{e}_3 = \mathbf{e}_{13}$$</div>
+</div>
+
+<h3>3.3 Multivector — tổ hợp tuyến tính của các blade</h3>
+<p>Một multivector tổng quát là tổ hợp tuyến tính của tất cả blade:</p>
+<div class="math-block">$$A = a_0 \cdot 1 + a_1 \mathbf{e}_1 + a_2 \mathbf{e}_2 + a_3 \mathbf{e}_3 + a_{12}\mathbf{e}_{12} + a_{13}\mathbf{e}_{13} + a_{23}\mathbf{e}_{23} + a_{123}\mathbf{e}_{123}$$</div>
+<p>Đây là một vectơ trong không gian 8 chiều (với n=3). Các hệ số \(a_0, a_1, \ldots, a_{123}\) là số thực (hoặc số nguyên trong GABA).</p>
+
+<h3>3.4 Định nghĩa chính thức của đại số Clifford Cl(p,q,r)</h3>
+<div class="box box-def">
+  <div class="label lbl-def">Định nghĩa (Đại số Clifford)</div>
+  <p>Cho không gian vectơ \(V = \mathbb{R}^n\) với dạng toàn phương \(Q: V \to \mathbb{R}\). Đại số Clifford \(\text{Cl}(V,Q)\) là đại số thương của đại số tensor \(T(V)\) modulo lý tưởng sinh bởi các phần tử \(v\otimes v - Q(v)\cdot 1\).</p>
+  <p>Ký hiệu \(\text{Cl}(p,q,r)\) với:</p>
+  <ul>
+    <li>\(p\) = số generator có \(\varepsilon_k = +1\)</li>
+    <li>\(q\) = số generator có \(\varepsilon_k = -1\)</li>
+    <li>\(r\) = số generator có \(\varepsilon_k = 0\) (null)</li>
+    <li>\(p+q+r = n\)</li>
+  </ul>
+  <p>Ví dụ: \(\text{Cl}(3,0,0)\) = Euclide 3D, \(\text{Cl}(4,1,0)\) = CGA 3D (Conformal), \(\text{Cl}(3,0,1)\) = PGA 3D (Projective).</p>
+</div>
+
+<h3>3.5 Tại sao CGA (Conformal Geometric Algebra) lại hữu ích?</h3>
+<p>Trong hình học Euclide 3D, phép dịch chuyển (translation) không phải là phép xoay tuyến tính — điều này gây khó khăn khi muốn xử lý thống nhất. CGA nhúng \(\mathbb{R}^3\) vào \(\mathbb{R}^{4,1}\) (5 chiều) bằng cách thêm hai vectơ đặc biệt \(\mathbf{e}_o\) (gốc) và \(\mathbf{e}_\infty\) (điểm ở vô cực):</p>
+<div class="math-block">$$X_{CGA} = x_1\mathbf{e}_1 + x_2\mathbf{e}_2 + x_3\mathbf{e}_3 + \frac{1}{2}|x|^2 \mathbf{e}_\infty + \mathbf{e}_o$$</div>
+<p>Phép dịch chuyển, xoay, và chiếu đều trở thành phép biến đổi versor trong CGA. Đây là lý do CGA được dùng nhiều trong robot học và đồ họa máy tính.</p>
+
+<!-- ======================== SECTION 4 ======================== -->
+<h2 id="s4"><span class="section-num">4.</span> Framework GABA: Mã hóa hình học bằng số nguyên</h2>
+
+<h3>4.1 Quan sát chìa khóa: Chỉ số blade = XOR!</h3>
+
+<p>Đây là quan sát đơn giản nhưng quan trọng nhất của toàn bộ framework:</p>
+
+<div class="box box-insight">
+  <div class="label lbl-insight">Quan sát chìa khóa</div>
+  <p>Mỗi blade được biểu diễn bởi một tập chỉ số: \(\mathbf{e}_{12} \leftrightarrow \{1,2\}\), \(\mathbf{e}_{23} \leftrightarrow \{2,3\}\), v.v.</p>
+  <p>Chỉ số của tích \(\mathbf{e}_I \cdot \mathbf{e}_J\) (sau khi triệt tiêu bình phương) chính là <strong>hiệu đối xứng</strong>:</p>
+  <div class="math-block">$$I \triangle J = (I \cup J) \setminus (I \cap J)$$</div>
+  <p>Trong biểu diễn bitmask (số nhị phân), hiệu đối xứng chính là <strong>XOR</strong>:</p>
+  <div class="math-block">$$\text{index}(\mathbf{e}_I \cdot \mathbf{e}_J) = i \oplus j$$</div>
+  <p>Ví dụ: \(\mathbf{e}_{12} \cdot \mathbf{e}_{23}\): bitmask của \(\{1,2\}\) là \(011_2 = 3\), bitmask của \(\{2,3\}\) là \(110_2 = 6\).<br>
+  XOR: \(011 \oplus 110 = 101_2 = 5\) = bitmask của \(\{1,3\}\) = chỉ số của \(\mathbf{e}_{13}\). ✓</p>
+</div>
+
+<p>Điều này có nghĩa: phần chỉ số của mọi phép nhân hình học <em>không cần bảng tra</em> — chỉ cần một phép XOR. Phần duy nhất cần tra bảng là <em>dấu</em> \(s_{ij} \in \{-1, 0, +1\}\).</p>
+
+<h3>4.2 Product-Index Table (PIT) — Bảng tích chỉ số</h3>
+
+<div class="box box-def">
+  <div class="label lbl-def">Định nghĩa 3.1 (Kiểu Hình học / Geometric Type)</div>
+  <p>Một kiểu hình học \(T(n, \sigma)\) bao gồm chiều \(n \in \mathbb{N}\) và bảng tích chỉ số (PIT):</p>
+  <div class="math-block">$$\sigma: \{0,\ldots,2^n-1\}^2 \to \{0,\ldots,2^n-1\} \times \{-1, 0, 1\}$$</div>
+  <div class="math-block">$$\sigma(i, j) = (i \oplus j, \; s_{ij})$$</div>
+  <p>Trong đó dấu \(s_{ij}\) được tính như sau:</p>
+  <div class="math-block">$$s_{ij} = (-1)^{N(i,j)} \cdot \varepsilon_{i\cap j}$$</div>
+  <ul>
+    <li>\(N(i,j)\) = số lần hoán vị (transposition) cần thiết để sắp xếp lại các generator theo thứ tự chuẩn. Đây là số nghịch thế (inversion count): số cặp \((a,b)\) sao cho bit \(a\) thuộc \(i\), bit \(b\) thuộc \(j\), và \(a > b\).</li>
+    <li>\(\varepsilon_{i\cap j} = \prod_{k: \text{bit }k \in i\cap j} \varepsilon_k\) = tích các metric của những generator xuất hiện trong cả hai blade.</li>
+  </ul>
+</div>
+
+<div class="box box-eg">
+  <div class="label lbl-eg">Ví dụ tính PIT</div>
+  <p>Tính \(\sigma(3, 5)\) trong Euclide 3D (n=3, \(\varepsilon_k=1\) với mọi k):</p>
+  <ul>
+    <li>\(i = 3 = 011_2\) → tập \(\{0, 1\}\) → blade \(\mathbf{e}_0\mathbf{e}_1\)</li>
+    <li>\(j = 5 = 101_2\) → tập \(\{0, 2\}\) → blade \(\mathbf{e}_0\mathbf{e}_2\)</li>
+    <li>XOR: \(3 \oplus 5 = 011 \oplus 101 = 110_2 = 6\) → tập \(\{1, 2\}\) → blade \(\mathbf{e}_1\mathbf{e}_2\) ✓</li>
+    <li>\(N(3,5)\): generator trong \(j=\{0,2\}\) phải vượt qua generator trong \(i=\{0,1\}\). Bit 0 của \(j\) không vượt qua gì cả (không có generator nào trong \(i\) lớn hơn 0 và cũng có trong \(j\)... ta tính số cặp (a từ i, b từ j) với a&gt;b). Cặp: (1 từ i, 0 từ j) → 1 > 0 ✓. Vậy N=1.</li>
+    <li>\(i \cap j = \{0\}\) → \(\varepsilon_{\{0\}} = \varepsilon_0 = +1\)</li>
+    <li>\(s_{35} = (-1)^1 \cdot 1 = -1\)</li>
+  </ul>
+  <p>Kiểm tra: \(\mathbf{e}_0\mathbf{e}_1 \cdot \mathbf{e}_0\mathbf{e}_2 = \mathbf{e}_0 (\mathbf{e}_1 \mathbf{e}_0) \mathbf{e}_2 = \mathbf{e}_0 (-\mathbf{e}_0\mathbf{e}_1)\mathbf{e}_2 = -\mathbf{e}_0^2\mathbf{e}_1\mathbf{e}_2 = -1 \cdot \mathbf{e}_{12}\). ✓</p>
+</div>
+
+<p>Với \(n=5\) (CGA 3D), PIT có \(2^5 \times 2^5 = 1024\) entries, mỗi entry lưu \(\pm 1\) hay 0 (2 bit) → tổng cộng chỉ <strong>256 byte = 2 KB</strong>. Hoàn toàn nằm trong cache L1 của ASIC!</p>
+
+<h3>4.3 GInt — Đối tượng hình học là số nguyên lớn</h3>
+
+<div class="box box-def">
+  <div class="label lbl-def">Định nghĩa 3.2 (GInt — Geometric Integer)</div>
+  <p>Cho kiểu hình học \(T(n, \sigma)\) và độ rộng hệ số \(f\) bit. Một GInt là một số nguyên có đúng \(f \cdot 2^n\) bit, được chia thành \(N = 2^n\) trường \(f\)-bit liên tiếp:</p>
+  <div class="math-block">$$Z_A = [\underbrace{a_{N-1}}_{\text{blade }N{-}1} \;|\; \cdots \;|\; \underbrace{a_1}_{\text{blade }1} \;|\; \underbrace{a_0}_{\text{blade }0}]$$</div>
+  <p>Trường thứ \(i\) lưu hệ số \(a_i \in \mathbb{Z}\) của blade \(i\) trong đối tượng \(A = \sum_i a_i \mathbf{b}_i\).</p>
+</div>
+
+<div class="box box-eg">
+  <div class="label lbl-eg">Ví dụ GInt với n=3, f=16 bit</div>
+  <p>Đối tượng \(A = 3\mathbf{e}_1 - 2\mathbf{e}_2 + 5\mathbf{e}_{12}\) trong 3D Euclide:</p>
+  <div style="font-family: monospace; background: var(--bg3); padding: 0.8rem; border-radius: 6px; font-size: 0.85rem; overflow-x: auto;">
+    Z_A = [0 | 0 | 0 | 0 | 5 | 0 | -2 | 3 | 0]<br>
+    blade:   e123  e23  e13  e12   e3   e2    e1  1<br>
+    index:    7     6    5    4    3    2     1   0<br>
+    grade:    3     2    2    2    1    1     1   0
+  </div>
+  <p>Tổng: \(9 \times 16 = 144\) bit cho toàn bộ đối tượng. (Ta có 8 blade với n=3, cộng thêm guard bit.)</p>
+  <p><strong>Guard bit là gì?</strong> Mỗi trường f-bit được đệm thêm một vài bit 0 giữa các trường để phép cộng số nguyên lớn không "tràn" sang trường bên cạnh. Nhờ guard bit, phép cộng hai GInt = phép cộng số nguyên thông thường!</p>
+</div>
+
+<h3>4.4 SInt — Cảnh hình học là số nguyên</h3>
+
+<div class="box box-def">
+  <div class="label lbl-def">Định nghĩa 3.3 (SInt — Scene Integer)</div>
+  <p>Một SInt (Space Integer) \(Z\) mã hóa \(M\) đối tượng hình học bằng cách nối tiếp các GInt:</p>
+  <div class="math-block">$$Z = [Z_{M-1} \;|\; \cdots \;|\; Z_1 \;|\; Z_0]$$</div>
+  <p>Kích thước: \(M \cdot f \cdot 2^n\) bit. Lấy đối tượng thứ k: dịch phải \(k \cdot f \cdot N\) bit và lấy \(f \cdot N\) bit.</p>
+</div>
+
+<h3>4.5 OInt — Phép biến đổi là số nguyên</h3>
+
+<div class="box box-def">
+  <div class="label lbl-def">Định nghĩa 3.4 (OInt — Operator Integer)</div>
+  <p>Một OInt \(Z'\) mã hóa một ma trận nguyên \(M \in \mathbb{Z}^{N\times N}\) (với \(N=2^n\)):</p>
+  <div class="math-block">$$Z' = [m_{N-1,N-1} \;|\; \cdots \;|\; m_{0,1} \;|\; m_{0,0}]$$</div>
+  <p>Kích thước: \(4^n \cdot f\) bit. Với \(n=5, f=16\): \(4^5 \cdot 16 = 16384\) bit \(= 2\) KB.</p>
+</div>
+
+<h3>4.6 Ba dạng phép toán ⊗</h3>
+
+<p><strong>Dạng 1: Object–Object (Tích chập PIT)</strong></p>
+<div class="math-block">$$(A \otimes_T B)_k = \sum_{i \oplus j = k} s_{ij} \cdot A_i \cdot B_j$$</div>
+<p>Với mỗi blade đầu ra \(k\), cộng tất cả tích \(s_{ij} \cdot A_i \cdot B_j\) với điều kiện \(i \oplus j = k\). Có đúng \(N\) cặp \((i,j)\) thỏa mãn (với mỗi \(i\) có đúng một \(j = i \oplus k\)).</p>
+
+<p><strong>Dạng 2: Operator–Object (Nhân ma trận–vectơ)</strong></p>
+<div class="math-block">$$(Z' \otimes Z_A)_k = \sum_{j=0}^{N-1} Z'[k][j] \cdot (Z_A)_j$$</div>
+
+<p><strong>Dạng 3: Operator–Scene (Broadcast — Phát sóng)</strong></p>
+<div class="math-block">$$Z' \otimes Z_{scene} = [Z' \otimes Z_0 \;|\; Z' \otimes Z_1 \;|\; \cdots \;|\; Z' \otimes Z_{M-1}]$$</div>
+<p>Đây là chìa khóa hiệu năng: OInt \(Z'\) được tải <em>một lần duy nhất</em>, rồi áp dụng song song lên tất cả \(M\) đối tượng. Không phụ thuộc vào \(M\)!</p>
+
+<!-- ======================== SECTION 5 ======================== -->
+<h2 id="s5"><span class="section-num">5.</span> 5 Tiên đề GABA và Chứng minh</h2>
+
+<div class="box box-insight">
+  <div class="label lbl-insight">Lưu ý quan trọng từ paper bổ sung</div>
+  <p>Paper bổ sung (Supplement) chứng minh rằng cả 5 tiên đề này thực ra là <strong>hệ quả</strong> của Bổ đề Trung thực (xem Mục 6) — chúng không cần được giả định độc lập. Nhưng ta vẫn trình bày chúng vì chúng làm rõ cấu trúc của GABA.</p>
+</div>
+
+<h3>Tiên đề G1: XOR-Indexing (Đóng cửa về chỉ số)</h3>
+<div class="box box-thm">
+  <div class="label lbl-thm">Tiên đề G1</div>
+  <div class="math-block">$$\sigma(i,j).\text{index} = i \oplus j \quad \text{với mọi } i, j \in \{0,\ldots,2^n-1\}$$</div>
+</div>
+<div class="box box-proof">
+  <div class="label lbl-proof">Chứng minh</div>
+  <p>Blade \(\mathbf{e}_I\) là tích có thứ tự \(\prod_{k\in I}\mathbf{e}_k\). Khi nhân \(\mathbf{e}_I \cdot \mathbf{e}_J\):</p>
+  <ul>
+    <li>Các generator trong \(I \cap J\) xuất hiện hai lần: \(\mathbf{e}_k^2 = \varepsilon_k\) → biến mất (chỉ đóng góp vào dấu).</li>
+    <li>Các generator trong \(I \triangle J = (I \cup J) \setminus (I \cap J)\) còn lại → tạo thành blade kết quả.</li>
+    <li>Trong biểu diễn bitmask: \(I \triangle J = I \oplus J\). □</li>
+  </ul>
+  <p><em>Mô phỏng:</em> Với n=2,3,4,5: kiểm tra tất cả \(4^n\) cặp chỉ số → 100% đúng.</p>
+</div>
+
+<h3>Tiên đề G2 (Đã sửa): Giao hoán phân bậc (Grade-Graded Commutativity)</h3>
+<div class="box box-corr">
+  <div class="label lbl-corr">Lỗi trong phiên bản gốc</div>
+  <p>Phiên bản gốc viết: "\(s_{ij} = -s_{ji}\) với mọi \(i \neq j\)" — điều này <strong>SAI</strong>. Nó chỉ đúng với các vector bậc 1 không chồng lấn. Với n=3: 32 trong 56 cặp vi phạm quy tắc này.</p>
+</div>
+<div class="box box-thm">
+  <div class="label lbl-thm">Tiên đề G2 (Đã sửa)</div>
+  <p>Gọi \(p = \text{popcount}(i)\), \(q = \text{popcount}(j)\) là bậc (grade) của blade \(i, j\).</p>
+  <p><strong>(a)</strong> Nếu \(i \cap j = \emptyset\) (không chồng lấn): \(\quad s_{ij} = (-1)^{pq} \cdot s_{ji}\)</p>
+  <p><strong>(b)</strong> Nếu \(i \cap j \neq \emptyset\) (có chồng lấn): \(\quad s_{ij} = (-1)^{pq} \cdot s_{ji} \cdot \eta(i,j)\)</p>
+  <p>với \(\eta(i,j) = \prod_{k: \text{bit }k \in i\cap j} \varepsilon_k\) = tích metric của các generator chung.</p>
+</div>
+<div class="box box-proof">
+  <div class="label lbl-proof">Chứng minh</div>
+  <p><strong>Phần (a): Trường hợp không chồng lấn.</strong></p>
+  <p>Khi \(I \cap J = \emptyset\), phép nhân \(\mathbf{e}_I \mathbf{e}_J\) không có bình phương nào. Để đổi thứ tự thành \(\mathbf{e}_J \mathbf{e}_I\), ta cần đẩy mỗi generator trong \(J\) (có \(q\) cái) vượt qua tất cả generator trong \(I\) (có \(p\) cái). Mỗi lần hoán vị đóng góp \(-1\). Tổng: \(pq\) hoán vị → \((-1)^{pq}\). □</p>
+  <p><strong>Tại sao quy tắc cũ "\(s_{ij} = -s_{ji}\)" chỉ đúng cho vectơ?</strong> Vectơ có bậc \(p=q=1\), không chồng lấn → \((-1)^{1\cdot1} = -1\). Nhưng scalars (\(p=0\)) luôn giao hoán: \((-1)^0=1\), tức \(s_{ij} = s_{ji}\), không phải \(-s_{ji}\).</p>
+</div>
+
+<h3>Tiên đề G3: Kết hợp (Associativity)</h3>
+<div class="box box-thm">
+  <div class="label lbl-thm">Tiên đề G3</div>
+  <div class="math-block">$$(A \otimes B) \otimes C = A \otimes (B \otimes C) \quad \text{với mọi GInt } A, B, C$$</div>
+</div>
+<div class="box box-proof">
+  <div class="label lbl-proof">Chứng minh</div>
+  <p>Phép \(\otimes\) của GABA chính xác là tích Clifford viết lại trên số nguyên. Đại số Clifford có tính kết hợp theo định nghĩa (nó là đại số tensor thương — luôn kết hợp). Vì PIT ánh xạ trung thực (faithful) tới tích Clifford (xem G1, G2), tính kết hợp được kế thừa. Với số nguyên chính xác (không làm tròn), điều này giữ nguyên không có sai số số học. □</p>
+  <p><em>Mô phỏng:</em> n=3, 1000 thử nghiệm ngẫu nhiên với số nguyên Python (độ chính xác tùy ý), hệ số trong \([-10^9, 10^9]\) → 1000/1000 đúng.</p>
+</div>
+
+<h3>Tiên đề G4: Số nguyên chính xác (Integer Exactness)</h3>
+<div class="box box-thm">
+  <div class="label lbl-thm">Tiên đề G4</div>
+  <p>Tất cả hệ số \(a_i \in \mathbb{Z}\) được lưu dưới dạng số nguyên chính xác. Không có xấp xỉ dấu phảy động nào.</p>
+  <p>Độ tăng trưởng mỗi bước nhân: \(|a_i|\) tăng tối đa \(N = 2^n\) lần. Sau \(k\) bước: cần \(f_0 + k\lceil\log_2 N\rceil\) bit.</p>
+</div>
+<div class="box box-eg">
+  <div class="label lbl-eg">Ví dụ tăng trưởng bit</div>
+  <p>n=5 (N=32), hệ số ban đầu 16 bit, sau 10 bước nhân:</p>
+  <div class="math-block">$$f_{10} = 16 + 10 \cdot \lceil\log_2 32\rceil = 16 + 10 \cdot 5 = 66 \text{ bit}$$</div>
+  <p>Vẫn hoàn toàn quản lý được. Sau 100 bước: 516 bit — cần số nguyên lớn (bigint). Paper cung cấp 3 giải pháp cho vấn đề này (xem Mục 8).</p>
+</div>
+
+<h3>Tiên đề G5: Phân phối (Distributivity)</h3>
+<div class="box box-thm">
+  <div class="label lbl-thm">Tiên đề G5</div>
+  <div class="math-block">$$A \otimes (B + C) = (A \otimes B) + (A \otimes C)$$</div>
+  <p>trong đó \(+\) là cộng theo từng trường trên GInt.</p>
+</div>
+<div class="box box-proof">
+  <div class="label lbl-proof">Chứng minh</div>
+  <div class="math-block">$$(A \otimes (B+C))_k = \sum_{i\oplus j=k} s_{ij} A_i (B_j + C_j)$$</div>
+  <div class="math-block">$$= \sum_{i\oplus j=k} s_{ij} A_i B_j + \sum_{i\oplus j=k} s_{ij} A_i C_j = (A\otimes B)_k + (A\otimes C)_k \quad \square$$</div>
+</div>
+
+<!-- ======================== SECTION 6 ======================== -->
+<h2 id="s6"><span class="section-num">6.</span> Bổ đề Trung thực (Faithfulness Lemma) <span class="tag tag-new">Mới</span></h2>
+
+<p>Paper bổ sung đặt câu hỏi nền tảng: <em>Liệu phép \(\otimes\) của GABA có thực sự bằng tích Clifford không?</em> Bổ đề Trung thực trả lời khẳng định, và chứng minh nó một cách nghiêm ngặt.</p>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Bổ đề 2.2 (Trung thực / Faithfulness)</div>
+  <p>Xét không gian vectơ \(A_n = \mathbb{Q}^{2^n}\) với cơ sở \(\{b_i\}_{i=0}^{2^n-1}\) và phép nhân trên cơ sở:</p>
+  <div class="math-block">$$b_i \cdot b_j := s_{ij} \cdot b_{i\oplus j}$$</div>
+  <p>mở rộng song tuyến tính. Khi đó \((A_n, +, \cdot)\) là đại số kết hợp đơn vị <strong>đẳng cấu</strong> với đại số Clifford \(\text{Cl}(p,q,r)\) của dạng toàn phương \(Q = \text{diag}(\varepsilon_0,\ldots,\varepsilon_{n-1})\).</p>
+</div>
+
+<div class="box box-proof">
+  <div class="label lbl-proof">Chứng minh</div>
+  <p>Ta xây dựng đẳng cấu đại số \(\Phi: A_n \to \text{Cl}(p,q,r)\) tường minh.</p>
+  <p><strong>Bước 1 — Định nghĩa ánh xạ tuyến tính:</strong></p>
+  <div class="math-block">$$\Phi(b_i) = \mathbf{e}_S \quad \text{với } S = \text{bits}(i) = \{k : \text{bit }k\text{ được bật trong }i\}$$</div>
+  <p>và \(\mathbf{e}_S = \mathbf{e}_{k_1}\cdots\mathbf{e}_{k_r}\) với \(k_1 < \cdots < k_r\) là các phần tử của \(S\) theo thứ tự tăng dần.</p>
+  <p>Vì cả \(\{b_i\}\) và \(\{\mathbf{e}_S\}\) đều là cơ sở của không gian \(2^n\)-chiều, \(\Phi\) là đẳng cấu tuyến tính.</p>
+  <p><strong>Bước 2 — Kiểm tra bảo toàn phép nhân:</strong> Ta cần \(\Phi(b_i \cdot b_j) = \Phi(b_i) \cdot \Phi(b_j)\).</p>
+  <p>Vế trái: \(\Phi(b_i \cdot b_j) = \Phi(s_{ij} b_{i\oplus j}) = s_{ij} \mathbf{e}_{\text{bits}(i\oplus j)}\).</p>
+  <p>Lưu ý: \(\text{bits}(i\oplus j) = \text{bits}(i) \triangle \text{bits}(j)\) (hiệu đối xứng).</p>
+  <p>Vế phải: Trong đại số Clifford, tích hai blade:</p>
+  <div class="math-block">$$\mathbf{e}_S \cdot \mathbf{e}_T = (-1)^{N(i_S, i_T)} \cdot \left(\prod_{k\in S\cap T} \varepsilon_k\right) \cdot \mathbf{e}_{S\triangle T}$$</div>
+  <p>Đây chính là \(s_{ij} \cdot \mathbf{e}_{\text{bits}(i\oplus j)}\) theo định nghĩa PIT. Vậy hai vế bằng nhau → \(\Phi\) là đẳng cấu đại số. □</p>
+</div>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Hệ quả 2.3</div>
+  <p>Cả 5 tiên đề G1–G5 là hệ quả của Bổ đề Trung thực và các tính chất đã biết của \(\text{Cl}(p,q,r)\). Chúng không cần được giả định độc lập.</p>
+  <ul>
+    <li>G1, G2: từ định nghĩa PIT trực tiếp.</li>
+    <li>G3 (kết hợp): \(\text{Cl}(p,q,r)\) kết hợp + \(\Phi\) là đẳng cấu vành.</li>
+    <li>G4: thiết kế (dùng \(\mathbb{Z}\)-hệ số).</li>
+    <li>G5: tính song tuyến tính trong mọi vành.</li>
+  </ul>
+</div>
+
+<div class="box box-insight">
+  <div class="label lbl-insight">Ý nghĩa của Bổ đề Trung thực</div>
+  <p>Bổ đề này nói: <strong>GABA không phải đại số mới</strong>. Nó là đại số Clifford, nhưng được viết lại bằng ngôn ngữ số nguyên và XOR. Mọi tính chất của đại số Clifford (kết hợp, grade structure, versor action, v.v.) đều được kế thừa tự động.</p>
+  <p>Điều này cực kỳ quan trọng: ta không cần phải chứng minh lại mọi thứ từ đầu — chỉ cần dùng Bổ đề này làm cầu nối.</p>
+</div>
+
+<!-- ======================== SECTION 7 ======================== -->
+<h2 id="s7"><span class="section-num">7.</span> Định lý Sparsity Vandermonde</h2>
+
+<p>Phần này chứng minh rằng ma trận của OInt không dày đặc — nó có cấu trúc thưa (sparse) có thể khai thác để tăng tốc.</p>
+
+<h3>7.1 Versor và tác dụng Sandwich</h3>
+<p>Một <em>versor</em> trong đại số Clifford là tích của các vector khả nghịch: \(R = \mathbf{v}_1 \mathbf{v}_2 \cdots \mathbf{v}_k\). Mọi phép biến đổi hình học (xoay, phản chiếu, dịch chuyển trong CGA) đều là versor.</p>
+<p>Tác dụng của versor \(R\) lên một đối tượng \(X\) là:</p>
+<div class="math-block">$$\varphi_R(X) = R X R^{-1} \quad \text{(sandwich product)}$$</div>
+
+<h3>7.2 Định lý Bảo toàn Bậc</h3>
+<div class="box box-thm">
+  <div class="label lbl-thm">Định lý 6.2.1 (Bảo toàn Bậc / Grade-Preservation)</div>
+  <p>Gọi \(R\) là một versor trong \(\text{Cl}(n,\sigma)\). Tác dụng \(\varphi_R: X \mapsto RXR^{-1}\) bảo toàn bậc:</p>
+  <div class="math-block">$$\text{grade}(\varphi_R(X)) = \text{grade}(X)$$</div>
+  <p>Tương đương: Ma trận OInt \(M_R\) thỏa mãn \(M_R[k][j] = 0\) khi \(\text{popcount}(k) \neq \text{popcount}(j)\).</p>
+</div>
+<div class="box box-proof">
+  <div class="label lbl-proof">Chứng minh</div>
+  <p>Một versor \(R = \mathbf{v}_1 \cdots \mathbf{v}_m\) là hợp của \(m\) tác dụng sandwich bởi vector đơn.</p>
+  <p>Với một vector đơn \(\mathbf{v}\), tác dụng \(X \mapsto \mathbf{v}X\mathbf{v}^{-1}\) trên blade bậc k:</p>
+  <ul>
+    <li>Nếu \(\mathbf{v}\) và blade \(B_k\) "vuông góc" (không chia sẻ generator): \(\mathbf{v}B_k\mathbf{v}^{-1} = (-1)^k B_k\) → cùng bậc.</li>
+    <li>Trường hợp tổng quát: tác dụng là phép xoay bảo toàn bậc [Lounesto 2001, Thm 3.7].</li>
+  </ul>
+  <p>Bằng quy nạp trên \(m\): hợp của \(m\) tác dụng bảo toàn bậc → bảo toàn bậc. □</p>
+  <p><em>Mô phỏng:</em> n=3,4,5 với rotor ngẫu nhiên → 0 vi phạm trong tất cả cặp off-grade.</p>
+</div>
+
+<h3>7.3 Định lý Sparsity Vandermonde</h3>
+<div class="box box-thm">
+  <div class="label lbl-thm">Định lý 6.2.2 (Vandermonde Sparsity Bound)</div>
+  <p>Với mọi ánh xạ tuyến tính bảo toàn bậc \(\varphi\) trên \(\text{Cl}(n,\sigma)\), ma trận OInt \(M_\varphi\) có tối đa:</p>
+  <div class="math-block">$$\text{nnz}(M_\varphi) \leq \sum_{k=0}^{n} \binom{n}{k}^2 = \binom{2n}{n}$$</div>
+  <p>phần tử khác không, trong tổng số \(4^n\) phần tử. Mật độ:</p>
+  <div class="math-block">$$\rho_n = \frac{\binom{2n}{n}}{4^n} \sim \frac{1}{\sqrt{\pi n}} \quad \text{khi } n\to\infty$$</div>
+  <p>Giới hạn này chặt: đạt được khi hợp đủ tất cả xoay.</p>
+</div>
+<div class="box box-proof">
+  <div class="label lbl-proof">Chứng minh (2 bước)</div>
+  <p><strong>Bước 1: Ma trận OInt là block-diagonal.</strong></p>
+  <p>Vì \(M_\varphi[k][j] = 0\) khi \(\text{popcount}(k) \neq \text{popcount}(j)\) (từ Định lý 6.2.1), ma trận có dạng:</p>
+  <div class="math-block">$$M_\varphi = \text{diag}(B_0, B_1, B_2, \ldots, B_n)$$</div>
+  <p>Block \(B_k\) có kích thước \(\binom{n}{k} \times \binom{n}{k}\) (số blade bậc k).</p>
+  <p><strong>Bước 2: Đếm phần tử khác không tối đa.</strong></p>
+  <div class="math-block">$$\text{nnz}(M_\varphi) \leq \sum_{k=0}^{n} \binom{n}{k}^2$$</div>
+  <p><strong>Bước 3: Áp dụng đồng nhất thức Vandermonde.</strong></p>
+  <p>Xét phép khai triển \((1+x)^n \cdot (1+x)^n = (1+x)^{2n}\). So sánh hệ số của \(x^n\):</p>
+  <div class="math-block">$$\text{Vế trái: } \sum_{k=0}^{n} \binom{n}{k} \binom{n}{n-k} = \sum_{k=0}^{n} \binom{n}{k}^2$$</div>
+  <div class="math-block">$$\text{Vế phải: } \binom{2n}{n}$$</div>
+  <p>Vậy \(\sum_{k=0}^{n} \binom{n}{k}^2 = \binom{2n}{n}\). □</p>
+  <p><strong>Bước 4: Tiệm cận.</strong> Dùng công thức Stirling: \(k! \approx \sqrt{2\pi k}(k/e)^k\):</p>
+  <div class="math-block">$$\binom{2n}{n} = \frac{(2n)!}{(n!)^2} \approx \frac{\sqrt{4\pi n}(2n/e)^{2n}}{2\pi n (n/e)^{2n}} = \frac{4^n}{\sqrt{\pi n}}$$</div>
+  <p>Vậy \(\rho_n = \binom{2n}{n}/4^n \approx 1/\sqrt{\pi n}\). □</p>
+</div>
+
+<h3>7.4 Bảng minh họa Sparsity</h3>
+<table>
+  <tr><th>n</th><th>N=2ⁿ</th><th>N²=4ⁿ (tổng)</th><th>C(2n,n) (tối đa)</th><th>Mật độ</th><th>nnz (rotor đơn)</th><th>nnz (tất cả xoay)</th></tr>
+  <tr><td>2</td><td>4</td><td>16</td><td>6</td><td>37.5%</td><td>6</td><td>6</td></tr>
+  <tr><td>3</td><td>8</td><td>64</td><td>20</td><td>31.25%</td><td>12</td><td>20</td></tr>
+  <tr><td>4</td><td>16</td><td>256</td><td>70</td><td>27.34%</td><td>24</td><td>70</td></tr>
+  <tr><td>5</td><td>32</td><td>1024</td><td>252</td><td>24.61%</td><td>48</td><td>252</td></tr>
+  <tr><td>6</td><td>64</td><td>4096</td><td>924</td><td>22.56%</td><td>96</td><td>924</td></tr>
+</table>
+<div class="callout">
+  <span class="callout-icon">💡</span>
+  <div><strong>Phát hiện quan trọng:</strong> Một rotor đơn mặt phẳng tại n=5 chỉ có 48/1024 = <strong>4.7%</strong> phần tử khác không — thấp hơn nhiều so với giới hạn Vandermonde 24.61%. Giới hạn chặt chỉ đạt được khi hợp TẤT CẢ \(\binom{n}{2}\) mặt phẳng xoay. Trong thực tế (robot học, đồ họa), ta thường chỉ dùng 1-2 phép xoay, nên sparsity thực tế gần 4.7% hơn.</div>
+</div>
+
+<!-- ======================== SECTION 8 ======================== -->
+<h2 id="s8"><span class="section-num">8.</span> Tăng trưởng Hệ số và 3 Giải pháp <span class="tag tag-new">Mới trong Supplement</span></h2>
+
+<h3>8.1 Vấn đề: Hệ số tăng theo lũy thừa</h3>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Mệnh đề 4.1 (Giới hạn hệ số sau 1 bước)</div>
+  <div class="math-block">$$\|Z_A \otimes Z_B\|_\infty \leq N \cdot \|Z_A\|_\infty \cdot \|Z_B\|_\infty$$</div>
+  <p>Giới hạn này chặt.</p>
+</div>
+<div class="box box-proof">
+  <div class="label lbl-proof">Chứng minh</div>
+  <p>Mỗi hệ số đầu ra:</p>
+  <div class="math-block">$$C[k] = \sum_{i\oplus j=k} s_{ij} A_i B_j$$</div>
+  <p>là tổng của đúng \(N\) số hạng (với mỗi \(i\) có duy nhất \(j = i\oplus k\)). Mỗi hạng \(|s_{ij} A_i B_j| \leq \|A\|_\infty \cdot \|B\|_\infty\). □</p>
+</div>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Mệnh đề 4.2 (Giới hạn sau k bước)</div>
+  <div class="math-block">$$\|Z_{(k)}\|_\infty \leq N^{k-1} \cdot C_0^k$$</div>
+  <p>Ví dụ: n=5 (N=32), \(C_0=1\), k=100: giới hạn \(\approx 32^{99} \approx 2^{495}\) → cần ~500 bit.</p>
+</div>
+
+<h3>8.2 Giải pháp 1: Số học Modular + Định lý Phần dư Trung Quốc (CRT)</h3>
+
+<div class="box box-def">
+  <div class="label lbl-def">Định nghĩa 4.3 (Multi-Modular GABA)</div>
+  <p>Chọn \(m\) số nguyên tố \(p_1, \ldots, p_m\) sao cho \(P = p_1\cdots p_m > 2N^{k-1}C_0^k\). Tính song song:</p>
+  <div class="math-block">$$Z^{(t)} = Z_A \otimes Z_B \pmod{p_t} \quad t=1,\ldots,m$$</div>
+  <p>Phục hồi kết quả chính xác bằng CRT.</p>
+</div>
+
+<p><strong>CRT (Định lý Phần dư Trung Quốc) là gì?</strong> Nếu bạn biết \(x \bmod p_1, x \bmod p_2, \ldots, x \bmod p_m\) với \(p_1, \ldots, p_m\) đôi một nguyên tố cùng nhau, và \(|x| < P/2\) (P là tích), thì \(x\) được xác định duy nhất. Đây là một định lý cổ điển từ 2000 năm trước.</p>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Mệnh đề 4.4 (CRT phục hồi đúng)</div>
+  <p>Nếu \(P > 2\|kết quả\|_\infty\), phục hồi CRT cho kết quả chính xác.</p>
+</div>
+
+<table>
+  <tr><th>n</th><th>k (bước)</th><th>Cần B bit</th><th>Số moduli 62-bit</th><th>Chi phí</th></tr>
+  <tr><td>5</td><td>10</td><td>~45</td><td>1</td><td>1× (rất nhỏ)</td></tr>
+  <tr><td>5</td><td>50</td><td>~247</td><td>4</td><td>4×</td></tr>
+  <tr><td>5</td><td>100</td><td>~495</td><td>8</td><td>8×</td></tr>
+  <tr><td>5</td><td>1000</td><td>~4950</td><td>80</td><td>Không thực tế</td></tr>
+</table>
+
+<h3>8.3 Giải pháp 2: Chuẩn hóa GCD lười biếng (Lazy GCD Normalization)</h3>
+<p>Trong nhiều phép tính hình học thực tế, tất cả các hệ số blade chia hết cho một ước chung lớn. Khi phát hiện được, ta chia hết → hệ số giảm đáng kể.</p>
+<div class="box box-def">
+  <div class="label lbl-def">Định nghĩa 4.5</div>
+  <p>Dạng chuẩn hóa GCD của \(Z_A\) là \(Z_A^{norm} = (Z_A/g, g)\) với \(g = \gcd(Z_A[0], Z_A[1], \ldots, Z_A[N-1])\).</p>
+</div>
+<p>Chi phí overhead: tính GCD của N=32 số ~12% so với phép \(\otimes\) → chấp nhận được.</p>
+
+<h3>8.4 Giải pháp 3: FP-GABA với IEEE 754 và Giới hạn Sai số Tường minh</h3>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Định lý 4.7 (Sai số FP-GABA sau 1 bước)</div>
+  <div class="math-block">$$\|\text{fl}(Z_A \otimes Z_B) - \text{exact}(Z_A \otimes Z_B)\|_\infty \leq N(1+\varepsilon_m)^{N+1} C_A C_B \varepsilon_m$$</div>
+  <p>Với FMA (fused multiply-add): \(\leq (N-1)\varepsilon_m C_A C_B + O(\varepsilon_m^2)\) (chặt hơn)</p>
+  <p>Trong đó \(\varepsilon_m = 2^{-52}\) là epsilon máy cho double precision.</p>
+</div>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Định lý 4.8 (Tích lũy sai số sau k bước)</div>
+  <p>Với versor chuẩn hóa (\(\|Z\|_\infty \approx 1\)) và chuẩn hóa lại mỗi 100 bước:</p>
+  <div class="math-block">$$\|\text{sai số}\|_\infty \leq k(N-1)\varepsilon_m + O(k^2 N^2 \varepsilon_m^2)$$</div>
+</div>
+
+<table>
+  <tr><th>k (bước)</th><th>N=32</th><th>Giới hạn sai số (FMA + chuẩn hóa)</th><th>Chữ số có nghĩa</th></tr>
+  <tr><td>10</td><td>32</td><td>\(3.1 \times 10^{-14}\)</td><td>~14</td></tr>
+  <tr><td>100</td><td>32</td><td>\(3.1 \times 10^{-13}\)</td><td>~13</td></tr>
+  <tr><td>1000</td><td>32</td><td>\(6.9 \times 10^{-12}\)</td><td>~11</td></tr>
+  <tr><td>100000</td><td>32</td><td>\(6.9 \times 10^{-10}\)</td><td>~9</td></tr>
+</table>
+<p>Kết luận: Sau 100.000 bước, vẫn giữ được 9 chữ số có nghĩa — đủ cho hầu hết ứng dụng đồ họa!</p>
+
+<h3>8.5 Khi nào GABA đạt độ phức tạp gần XOR?</h3>
+<div class="box box-thm">
+  <div class="label lbl-thm">Định lý 4.9 (Miền Gần-Bitwise)</div>
+  <p>GABA đạt \(O(N)\) phép toán bit mỗi bước \(\otimes\) (thay vì \(O(N^2)\)) trong các trường hợp:</p>
+  <p><strong>Trường hợp A (Binary GABA, metric null):</strong> Hệ số \(\in GF(2)\), \(\varepsilon_k=0\). Phép \(\otimes\) là tích chập AND-XOR: \(O(N\log N)\) phép XOR qua biến đổi Walsh-Hadamard.</p>
+  <p><strong>Trường hợp B (Binary GABA, metric Euclide):</strong> Hệ số \(\in GF(2)\), \(\varepsilon_k=1\). Dấu \(\pm 1\) đều bằng 1 trong \(GF(2)\): \(\otimes\) = tích chập XOR, \(O(N\log N)\).</p>
+  <p><strong>Trường hợp C (Versor thưa):</strong> Nếu OInt có \(\leq s\) phần tử khác không mỗi hàng: \(O(s\cdot N)\). Với rotor trong \(\text{Cl}(3,0,0)\): \(s=4\).</p>
+  <p><strong>Trường hợp tổng quát:</strong> \(O(N^2)\) — KHÔNG gần XOR. Tuyên bố gốc cần được làm rõ.</p>
+</div>
+
+<!-- ======================== SECTION 9 ======================== -->
+<h2 id="s9"><span class="section-num">9.</span> Binary GABA và Đại số Topo <span class="tag tag-new">Sửa + Mới</span></h2>
+
+<h3>9.1 Cấu trúc đại số trong đặc số 2</h3>
+<p>Binary GABA là GABA với hệ số trong trường \(GF(2) = \{0, 1\}\). Phép cộng trong \(GF(2)\) là XOR, phép nhân là AND.</p>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Định lý 5.1 (Giao hoán trong đặc số 2)</div>
+  <p>Trong \(\text{Cl}_2(n,\varepsilon)\) (đại số Clifford trên \(GF(2)\)):</p>
+  <div class="math-block">$$\mathbf{e}_i \mathbf{e}_j = \mathbf{e}_j \mathbf{e}_i \quad \text{với mọi } i\neq j$$</div>
+  <p>Tức là: đại số giao hoán với mọi metric!</p>
+</div>
+<div class="box box-proof">
+  <div class="label lbl-proof">Chứng minh</div>
+  <p>Từ luật Clifford: \(\mathbf{e}_i\mathbf{e}_j + \mathbf{e}_j\mathbf{e}_i = 2\delta_{ij}\varepsilon_i\). Trong \(GF(2)\): \(2=0\) nên vế phải = 0. Do đó \(\mathbf{e}_i\mathbf{e}_j = -\mathbf{e}_j\mathbf{e}_i = \mathbf{e}_j\mathbf{e}_i\) (vì \(-1=1\) trong \(GF(2)\)). □</p>
+</div>
+
+<h3>9.2 Trường hợp metric Euclide: Vành địa phương (local ring) — Không phải \((GF(2))^{2^n}\)!</h3>
+
+<div class="box box-corr">
+  <div class="label lbl-corr">Sửa lỗi trong paper gốc</div>
+  <p>Paper gốc tuyên bố Binary GABA Euclide đẳng cấu với \((GF(2))^{2^n}\) (tích trực tiếp của \(2^n\) bản sao \(GF(2)\)). Điều này <strong>SAI</strong>. Đây là vành địa phương (local ring), không phải vành bán đơn giản.</p>
+</div>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Định lý 5.2 (Cấu trúc đúng của Euclide Binary GABA)</div>
+  <p>Xét \(R = GF(2)[e_0,\ldots,e_{n-1}]/(e_k^2+1 : k=0,\ldots,n-1)\).</p>
+  <p>Trong \(GF(2)\): \(x^2+1 = (x+1)^2\) (công thức sinh viên đại học! Trong đặc số 2: \((x+1)^2 = x^2+2x+1 = x^2+1\)).</p>
+  <p>Vậy: \(R \cong GF(2)[e_0,\ldots,e_{n-1}]/((e_k+1)^2 : k)\) = đại số ngoài \(\Lambda_{GF(2)}(\xi_0,\ldots,\xi_{n-1})\) với \(\xi_k = e_k+1\).</p>
+  <p>Đây là vành địa phương với căn Jacobson \(J(R) = (\xi_0,\ldots,\xi_{n-1})\), \(J(R)^{n+1}=0\).</p>
+</div>
+
+<div class="box box-insight">
+  <div class="label lbl-insight">Phát hiện thú vị: Đổi biến thống nhất 2 trường hợp</div>
+  <p>Đặt \(\xi_k = e_k+1\). Thì \(\xi_k^2 = (e_k+1)^2 = e_k^2+1 = 0\) (trong GF(2)). Vậy cả metric Euclide (\(\varepsilon_k=1\)) lẫn metric null (\(\varepsilon_k=0\)) đều cho ra <strong>đại số ngoài</strong> \(\Lambda_{GF(2)}\) — chỉ khác nhau ở cách ánh xạ các generator! Hai trường hợp đồng cấu với nhau.</p>
+</div>
+
+<h3>9.3 Trường hợp metric Null: Đại số Ngoài và Đại số Topo</h3>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Định lý 5.3 (Binary GABA Null = Đại số Ngoài)</div>
+  <p>Với \(\varepsilon_k=0\) mọi k:</p>
+  <div class="math-block">$$\text{Cl}_2(n,0,\ldots,0) \cong \Lambda_{GF(2)}(e_0,\ldots,e_{n-1})$$</div>
+  <p>Hơn nữa, với phức đơn hình \(K\) trên đỉnh \(\{0,\ldots,n-1\}\), toán tử biên \(\partial\) định nghĩa bởi:</p>
+  <div class="math-block">$$\partial(e_{i_1}\wedge\cdots\wedge e_{i_k}) = \sum_{j=1}^{k} e_{i_1}\wedge\cdots\hat{e}_{i_j}\cdots\wedge e_{i_k}$$</div>
+  <p>(mũ ^ = bỏ phần tử đó) thỏa mãn \(\partial^2 = 0\) và cho đúng phức dây chuyền đồng điều đơn hình \(C_*(K; GF(2))\).</p>
+</div>
+
+<p><strong>Ý nghĩa thực tế:</strong></p>
+<ul>
+  <li><strong>Kiểm tra liên thông:</strong> \(H_0(K; GF(2)) \neq 0\) ⟺ \(K\) không rỗng. Tính via GABA = khử Gauss với XOR.</li>
+  <li><strong>Phát hiện vòng trong đồ thị:</strong> \(H_1(\text{đồ thị}; GF(2))\) = không gian chu trình GF(2) = đếm chu trình độc lập.</li>
+  <li><strong>Đặc tính Euler:</strong> \(\chi(K) = \sum_k (-1)^k \dim H_k\) — tính được bằng một tích vô hướng trong Binary GABA.</li>
+</ul>
+
+<!-- ======================== SECTION 10 ======================== -->
+<h2 id="s10"><span class="section-num">10.</span> Dạng Chuẩn (Canonical Form)</h2>
+
+<h3>10.1 Dạng chuẩn cho tương đương xạ ảnh (Z ~ λZ)</h3>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Định lý 6.1.1 (Dạng chuẩn xạ ảnh)</div>
+  <p>Cho \(Z_A \in \text{GInt}_T\) với ít nhất một hệ số khác không. Định nghĩa:</p>
+  <ul>
+    <li>\(g = \gcd(|a_0|, |a_1|, \ldots, |a_{N-1}|)\) (GCD tuyệt đối)</li>
+    <li>\(i_0 = \min\{i: a_i\neq 0\}\) (chỉ số của hệ số khác không đầu tiên)</li>
+    <li>\(Z_{canon}(A) = \frac{1}{g} \cdot Z_A \cdot \text{sgn}(a_{i_0})\) (chia GCD, làm hệ số đầu tiên dương)</li>
+  </ul>
+  <p>Khi đó: \(Z_A \sim \lambda \cdot Z_B\) với \(\lambda \in \mathbb{Z}\setminus\{0\}\) ⟺ \(Z_{canon}(A) = Z_{canon}(B)\).</p>
+  <p>Tính chất: (i) hệ số nguyên, (ii) khi hai GInt chỉ khác nhau bội số nguyên thì có cùng dạng chuẩn, (iii) lũy đẳng (\(Z_{canon}(Z_{canon}(A)) = Z_{canon}(A)\)), (iv) tính được trong \(O(N)\) bước.</p>
+</div>
+
+<div class="box box-eg">
+  <div class="label lbl-eg">Ví dụ</div>
+  <p>Hai GInt: \(Z_A = [6, 4, -2]\) và \(Z_B = [-9, -6, 3]\) (n=1 đơn giản hóa).</p>
+  <p>Dạng chuẩn \(Z_A\): \(g=2\), \(i_0=2\) (hệ số \(-2 \neq 0\), nhỏ nhất), \(\text{sgn}(-2) = -1\) → \(Z_{canon}(A) = (1/2)(-1)[6,4,-2] = [−3,−2,1]\). Hệ số đầu tiên khác không: \(a_2 = -2/2 = -1\), nhân \(-1\): \([3, 2, -1]\).</p>
+  <p>Dạng chuẩn \(Z_B\): \(g=3\), \(\text{sgn}(3)\)... \(Z_{canon}(B) = (1/3)(-1)[-9,-6,3] = [3,2,-1]\). ✓</p>
+</div>
+
+<h3>10.2 Dạng chuẩn cho tương đương versor — Smith Normal Form (SNF)</h3>
+<p>Bài toán khó hơn: hai đối tượng tương đương qua tác dụng versor: \(B = VAV^{-1}\). Liệu có dạng chuẩn không?</p>
+
+<div class="box box-def">
+  <div class="label lbl-def">Định nghĩa 6.1 (Ma trận Phụ hợp)</div>
+  <p>Cho versor \(V\), tác dụng phụ hợp \(\text{ad}_V: A \mapsto VAV^{-1}\) là ánh xạ \(\mathbb{Z}\)-tuyến tính. Ma trận phụ hợp \(M_V \in \mathbb{Z}^{N\times N}\):</p>
+  <div class="math-block">$$(M_V)_{k,j} = \text{hệ số của } b_k \text{ trong } V\otimes b_j\otimes V^{-1}$$</div>
+</div>
+
+<div class="box box-def">
+  <div class="label lbl-def">Định nghĩa 6.2 (Smith Normal Form)</div>
+  <p>Với ma trận \(M \in \mathbb{Z}^{m\times n}\), SNF là ma trận đường chéo duy nhất \(\text{diag}(d_1,\ldots,d_r,0,\ldots,0)\) với:</p>
+  <ul>
+    <li>\(d_1 | d_2 | \cdots | d_r\) (chuỗi chia hết)</li>
+    <li>\(M = U \cdot \text{SNF}(M) \cdot V\) với \(U, V \in GL(\mathbb{Z})\) (ma trận unimodular)</li>
+  </ul>
+  <p>Dãy \((d_1,\ldots,d_r)\) là bất biến SNF của M.</p>
+</div>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Định lý 6.3 (SNF là bất biến versor)</div>
+  <p>Nếu hai versor \(V, W\) gây ra cùng tác dụng phụ hợp (\(VAV^{-1} = WAW^{-1}\) với mọi A), thì \(\text{SNF}(M_V) = \text{SNF}(M_W)\). Dãy nhân tử bất biến của ma trận phụ hợp là bất biến của tác dụng hình học của versor.</p>
+</div>
+
+<p>Thuật toán tính SNF-CANON chạy trong \(O(N^3 \log B)\) với \(B = \|M_V\|_\infty\) — đa thức thời gian. Với n=5: \(O(32^3 \cdot (5+2\log C_V)) \approx 500.000\) phép toán — nhanh trên phần cứng.</p>
+
+<!-- ======================== SECTION 11 ======================== -->
+<h2 id="s11"><span class="section-num">11.</span> Kết nối với Hình học Tính toán</h2>
+
+<h3>11.1 Vị từ Định hướng (Orientation Predicate)</h3>
+<p>Bài toán kinh điển: Cho 4 điểm \(P_0, P_1, P_2, P_3 \in \mathbb{R}^3\), xác định dấu của \(\det(P_1-P_0, P_2-P_0, P_3-P_0)\). Nếu dương: \(P_3\) ở bên trái mặt phẳng \(P_0P_1P_2\). Nếu âm: bên phải. Nếu 0: đồng phẳng.</p>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Mệnh đề 7.1 (Định hướng qua GABA)</div>
+  <p>Trong GABA với T(3,0,0), mã hóa \(D_k = P_k - P_0\) dưới dạng blade bậc 1. Khi đó:</p>
+  <div class="math-block">$$\text{orient}(P_0,P_1,P_2,P_3) = \text{sign}([Z_{D_1}\otimes Z_{D_2}\otimes Z_{D_3}][0])$$</div>
+  <p>Đây là phép tính chính xác trên \(\mathbb{Z}\) cần \(O(N^2) = 64\) phép nhân-cộng.</p>
+</div>
+<p><strong>So sánh với CGAL:</strong> CGAL dùng bộ lọc kép — lọc 1 (~12 phép toán, đúng 99.97% trường hợp), lọc 2 (~ 200 phép toán khi lọc 1 thất bại). GABA: <em>luôn đúng 64 phép</em>, không có nhánh, không có fallback.</p>
+
+<h3>11.2 Vị từ Trong-cầu (In-Sphere/Delaunay)</h3>
+<p>Bài toán: Điểm \(P_4\) có nằm trong mặt cầu ngoại tiếp \((P_0,P_1,P_2,P_3)\) không?</p>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Mệnh đề 7.2 (In-Sphere qua CGA)</div>
+  <p>Trong GABA với T(5, \(\sigma_{CGA}\)) (n=5), nhúng conformal:</p>
+  <div class="math-block">$$Z_{P_k} = P_k + \frac{\|P_k\|^2}{2}\mathbf{e}_\infty + \mathbf{e}_0$$</div>
+  <p>Khi đó:</p>
+  <div class="math-block">$$\text{in\_sphere}(P_0,\ldots,P_3,P_4) = \text{sign}([Z_{P_0}\otimes\cdots\otimes Z_{P_4}][\text{pseudoscalar}])$$</div>
+  <p>Tương đương với định thức 5×5 — tính chính xác qua GABA.</p>
+</div>
+
+<h3>11.3 Phép biến đổi batch — Lợi thế thực sự của GABA</h3>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Định lý 8.1 (Điểm hòa vốn Pre-Composition)</div>
+  <p>Với \(k\) phép biến đổi tuần tự trên \(M\) đối tượng, việc <em>hợp trước</em> (pre-compose) tất cả biến đổi thành một OInt, rồi áp dụng lên M đối tượng, tốt hơn áp dụng tuần tự khi:</p>
+  <div class="math-block">$$M > \frac{k N^3}{(k-1)N^2} = \frac{kN}{k-1} \approx N \quad \text{(với k lớn)}$$</div>
+  <p>Với n=5 (N=32): điểm hòa vốn tại \(M \approx 32\). Với \(M > 32\) đối tượng, pre-composition luôn thắng.</p>
+</div>
+<div class="box box-proof">
+  <div class="label lbl-proof">Chứng minh</div>
+  <p>Chi phí pre-compose: \((k-1)N^3 + MN^2\) (hợp k-1 ma trận + áp dụng M lần).</p>
+  <p>Chi phí tuần tự: \(kMN^2\).</p>
+  <p>Pre-compose thắng khi: \((k-1)N^3 + MN^2 < kMN^2\), tức \((k-1)N^3 < (k-1)MN^2\), tức \(N < M\). □</p>
+</div>
+
+<div class="box box-insight">
+  <div class="label lbl-insight">Tốc độ tăng cho cảnh lớn</div>
+  <p>Với \(M=10^6\) đối tượng, \(k=1000\) phép biến đổi, n=5:</p>
+  <div class="math-block">$$\text{Tốc độ tăng} = \frac{k\cdot M\cdot N^2}{(k-1)N^3 + M\cdot N^2} = \frac{10^3\cdot10^6\cdot1024}{999\cdot32768 + 10^6\cdot1024} \approx \mathbf{1024\times}$$</div>
+  <p>Đây là lợi thế <strong>thực sự có thể chứng minh</strong> của GABA.</p>
+</div>
+
+<!-- ======================== SECTION 12 ======================== -->
+<h2 id="s12"><span class="section-num">12.</span> Phân tích Phần cứng ASIC</h2>
+
+<h3>12.1 Thiết kế Pipeline</h3>
+<p>ASIC (Application-Specific Integrated Circuit) là chip chuyên dụng, khác CPU/GPU ở chỗ mạch điện được thiết kế cố định cho một tác vụ cụ thể. Không có overhead lệnh, không có branch prediction, không có cache miss.</p>
+
+<p>Pipeline GABA cho n=5 (N=32), tính \(Z' \otimes Z_A\):</p>
+<div style="background: var(--bg3); border-radius: 8px; padding: 1rem; font-family: monospace; font-size: 0.85rem; overflow-x: auto; margin: 1rem 0;">
+Stage 1: 32×32 = 1024 bộ nhân song song [Z'[k][j] × (Z_A)_j với mọi j]  (1 chu kỳ)<br>
+         Bảng dấu PIT (1024 bit = 256 byte) được ghi cứng vào mạch<br>
+Stage 2: XOR-grouping: nhóm 1024 tích theo chỉ số i⊕j                     (1 chu kỳ)<br>
+Stage 3: Cây cộng bậc 1: 16 cộng viên                                      (1 chu kỳ)<br>
+Stage 4: Cây cộng bậc 2: 8 cộng viên                                       (1 chu kỳ)<br>
+Stage 5: Cây cộng bậc 3: 4 cộng viên                                       (1 chu kỳ)<br>
+Stage 6: Cây cộng bậc 4: 2 cộng viên                                       (1 chu kỳ)<br>
+Stage 7: 1 bộ tích lũy cuối cùng                                           (1 chu kỳ)<br>
+─────────────────────────────────────────────────────────────────<br>
+Tổng: 7 chu kỳ pipeline = 3.5 ns tại 2 GHz
+</div>
+
+<p>Tại sao cần \(\log_2 N\) bậc cây cộng? Để cộng \(N=32\) số, ta có thể cộng song song: trước tiên cộng 16 cặp, rồi cộng 8 cặp kết quả, v.v. Cần \(\log_2 32 = 5\) bậc. Đây là lý do độ trễ là \(O(\log N)\) chứ không phải \(O(N)\).</p>
+
+<h3>12.2 Phân tích phức tạp</h3>
+<table>
+  <tr><th>Metric</th><th>CPU tuần tự (dày đặc)</th><th>CPU tuần tự (thưa)</th><th>GABA ASIC</th></tr>
+  <tr><td>Phép toán / đối tượng</td><td>\(N^2 = 4^n\)</td><td>\(\binom{2n}{n} \sim 4^n/\sqrt{\pi n}\)</td><td>N chu kỳ (pipelined)</td></tr>
+  <tr><td>Thời gian cho M đối tượng</td><td>\(M\cdot4^n\)</td><td>\(M\cdot\binom{2n}{n}\)</td><td>6+M-1 chu kỳ</td></tr>
+  <tr><td>n=5, tốc độ tăng</td><td>1× (baseline)</td><td>4.06×</td><td>170.7×</td></tr>
+</table>
+
+<p>Tốc độ tăng 170.7× = \(N^2 / \log_2 N = 1024 / 6 \approx 170.7\) (so với CPU dense, pipeline ASIC).</p>
+
+<h3>12.3 So sánh ASIC vs GPU vs CPU</h3>
+<table>
+  <tr><th>Metric</th><th>GABA ASIC (mô hình)</th><th>GPU FP16 (RTX 4090)</th><th>CPU AVX-512</th></tr>
+  <tr><td>Độ trễ (1 đối tượng)</td><td>3.5 ns</td><td>~50 ns</td><td>~2 ns</td></tr>
+  <tr><td>Thông lượng (pipeline)</td><td>2 tỷ obj/s</td><td>~100 triệu obj/s</td><td>~50 triệu obj/s</td></tr>
+  <tr><td>Độ chính xác số học</td><td>Chính xác (int16)</td><td>~3 chữ số ở FP16</td><td>~15 chữ số ở FP64</td></tr>
+  <tr><td>Năng lượng/biến đổi</td><td>~0.1 pJ (ước tính)</td><td>~10 pJ</td><td>~5 pJ</td></tr>
+</table>
+<div class="callout">
+  <span class="callout-icon">⚠️</span>
+  <div><strong>Lưu ý:</strong> Các con số ASIC là lý thuyết dựa trên mô hình VLSI, KHÔNG phải kết quả đo thực tế trên chip thật. Paper nêu rõ điều này.</div>
+</div>
+
+<h3>12.4 Nén SInt (SInt Compression)</h3>
+<p>Trong CGA 3D (n=5, N=32), các đối tượng hình học cơ bản rất thưa:</p>
+<table>
+  <tr><th>Loại đối tượng</th><th>NNZ / đối tượng</th><th>Sparsity</th><th>Tỷ lệ nén</th></tr>
+  <tr><td>Điểm 3D (grade-1)</td><td>5</td><td>84.4%</td><td>4.88×</td></tr>
+  <tr><td>Mặt cầu</td><td>5</td><td>84.4%</td><td>4.88×</td></tr>
+  <tr><td>Mặt phẳng (grade-4)</td><td>5</td><td>84.4%</td><td>4.88×</td></tr>
+  <tr><td>Đường thẳng (grade-2)</td><td>≤8</td><td>≥75%</td><td>3.05×</td></tr>
+  <tr><td>Đường tròn</td><td>≤10</td><td>≥68.8%</td><td>2.44×</td></tr>
+</table>
+<p>Tỷ lệ nén 4.88× tính như sau: mỗi hệ số khác không cần 5 bit chỉ số + 16 bit giá trị = 21 bit. 5 hệ số = 105 bit. Không nén: 32 × 16 = 512 bit. Tỷ lệ: 512/105 ≈ 4.88×.</p>
+
+<!-- ======================== SECTION 13 ======================== -->
+<h2 id="s13"><span class="section-num">13.</span> GABA có thực sự "cách mạng" không?</h2>
+
+<p>Paper bổ sung phân tích thẳng thắn, chia làm 3 nhóm:</p>
+
+<h3>13.1 GABA THỰC SỰ vượt trội</h3>
+<ul>
+  <li><strong>Biến đổi batch lớn (\(M \gg N\), \(k \geq 1\) toán tử):</strong> Pre-composition (Định lý 8.1) cho tốc độ tăng \(\Omega(M/N)\) — có thể chứng minh, không điều kiện, đúng ngay cả trên CPU. M=10⁶, k=1000: ~1024×.</li>
+  <li><strong>Tính chính xác cho trường hợp suy biến:</strong> Vị từ GABA (orientation, in-sphere) luôn chính xác, không cần filter, không nhánh fallback. CGAL thất bại khi điểm trùng/đồng phẳng.</li>
+  <li><strong>Query topo/phát hiện va chạm (Binary GABA):</strong> \(O(N)\) phép XOR cho kiểm tra incidence hyperedge. Kết nối tự nhiên với đại số topo.</li>
+  <li><strong>Đại số thống nhất qua nhiều loại hình học:</strong> Một ASIC phục vụ Euclide, Conformal, Projective, Hyperbolic bằng cách chỉ đổi PIT.</li>
+  <li><strong>Pipeline ASIC cố định:</strong> O(n) bậc pipeline, độ trễ xác định — quan trọng cho robot thời gian thực.</li>
+</ul>
+
+<h3>13.2 GABA Tương đương</h3>
+<ul>
+  <li>Xoay đơn 3D trên ít đối tượng: GABA (1024 phép) vs quaternion (28 phép) — GABA chậm hơn 36×.</li>
+  <li>Ma trận 4×4 chiếu trong 3D: Eigen/BLAS tối ưu hóa vẫn nhanh hơn GABA.</li>
+  <li>Độ chính xác FP: FP-GABA đạt 11-14 chữ số vs 15-16 của IEEE 754 double.</li>
+</ul>
+
+<h3>13.3 GABA KHÔNG vượt trội (các tuyên bố bị rút lại)</h3>
+<ul>
+  <li><span class="tag tag-corr">Sai</span> "Phức tạp gần XOR phổ quát": Chỉ đúng cho Binary GABA. GABA tổng quát là \(O(N^2)\).</li>
+  <li><span class="tag tag-corr">Sai</span> "Nhanh hơn CGAL phổ quát": Chỉ đúng ở trường hợp suy biến.</li>
+  <li><span class="tag tag-corr">Sai</span> "\((GF(2))^{2^n}\) cho metric Euclide": Đúng ra là local ring.</li>
+</ul>
+
+<div class="box box-thm">
+  <div class="label lbl-thm">Định lý 9.1 (Tuyên bố Cách mạng Chính xác)</div>
+  <p>Trong miền <strong>biến đổi batch hình học chính xác</strong>: GABA với pre-composition cho tốc độ tăng \(\Omega(M/N)\), với \(M > N = 2^n\) là mọi cảnh thực tế.</p>
+  <p>Trong miền <strong>vị từ chính xác đồng đều</strong>: GABA loại bỏ kiến trúc filter đa nhánh của CGAL, cho vị từ chính xác \(O(N^2)\) không thất bại với trường hợp suy biến.</p>
+  <p>Trong miền <strong>phần cứng cố định-độ trễ</strong>: Pipeline ASIC O(n) bậc đạt ~2 tỷ biến đổi chính xác/giây (dự kiến 7nm CMOS).</p>
+  <p>Trong miền <strong>query topo (Binary GABA)</strong>: \(O(N\log N)\) phép toán bit cho phức dây chuyền, kết nối chứng minh được với đồng điều đơn hình.</p>
+</div>
+
+<hr>
+
+<h2>Tóm tắt toàn bộ</h2>
+
+<table>
+  <tr><th>Khái niệm</th><th>Ý nghĩa</th><th>Bài toán giải quyết</th></tr>
+  <tr><td>GInt</td><td>Đối tượng hình học = 1 số nguyên lớn</td><td>Lưu trữ thống nhất, không sai số</td></tr>
+  <tr><td>SInt</td><td>Cảnh = nối tiếp các GInt</td><td>Biến đổi batch song song</td></tr>
+  <tr><td>OInt</td><td>Phép biến đổi = ma trận nguyên</td><td>Pre-composition, tốc độ tăng</td></tr>
+  <tr><td>PIT</td><td>Bảng dấu 2KB</td><td>Thay thế float bằng lookup cố định</td></tr>
+  <tr><td>XOR-index</td><td>Chỉ số blade tích = XOR bitmask</td><td>Phần tốn kém nhất = 1 lệnh CPU</td></tr>
+  <tr><td>Sparsity</td><td>OInt có ≤ C(2n,n)/4ⁿ ≈ 24% phần tử ≠0</td><td>Giảm phép nhân 4×</td></tr>
+  <tr><td>Binary GABA</td><td>Hệ số ∈ GF(2)</td><td>Topo + incidence = XOR thuần túy</td></tr>
+  <tr><td>Dạng chuẩn</td><td>GCD normalization / SNF</td><td>So sánh hình học = so sánh số</td></tr>
+  <tr><td>FP-GABA</td><td>Phiên bản dấu phảy động</td><td>Giữ 9-14 chữ số sau 10⁴-10⁵ bước</td></tr>
+</table>
+
+<div class="box box-insight" style="margin-top: 2rem;">
+  <div class="label lbl-insight">Triết lý cốt lõi của GABA</div>
+  <p>GABA không phải một đại số mới. Nó là <strong>Clifford algebra được nhìn qua kính của phần cứng</strong>: cấu trúc XOR-index vốn có trong lý thuyết, nhưng GABA lần đầu tiên làm nó <em>tường minh và khai thác được</em> ở cấp độ phần cứng. Bảng PIT là "linh hồn" của geometry baked vào silicon. OInt là geometry-as-data, cho phép pipeline cố định phục vụ mọi loại hình học chỉ bằng cách thay bảng tra.</p>
+</div>
+
+<p style="color: var(--text3); font-size: 0.85rem; margin-top: 3rem; text-align: center;">
+Bài giảng được soạn dựa trên: "GABA: Geometric Algebra as Big-Integer Algebra" (Hung Dinh Phu Dang, tháng 4/2026) và bài báo bổ sung cùng tác giả. Mọi định lý, chứng minh và số liệu mô phỏng được trích từ bài báo gốc và giải thích từ đầu.
+</p>
+
+</body>
+</html>
