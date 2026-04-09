@@ -1,0 +1,101 @@
+Có vẻ đây là câu hỏi chúng ta cần quan tâm nhất : "Làm thế nào để encode geometric objects sao cho mọi câu hỏi quan trọng về chúng đều có câu trả lời bằng một phép bitwise duy nhất?"
+
+Quan sát nền tảng: Tất cả CG đều là sign tests
+Đây là thực tế đã biết nhưng chưa được exploit triệt để:
+
+Orientation test:   sign(det[p1, p2, p3])         → {+1, 0, -1}
+In-circle test:     sign(det[p1, p2, p3, p4])      → {+1, 0, -1}
+Intersection test:  sign(A) AND sign(B) > 0?       → {yes, no}
+Convex hull:        sequence of orientation tests  → {yes, no}
+Voronoi:            sequence of in-circle tests    → {yes, no}
+
+Mọi predicate cơ bản trong CG là sign of a polynomial trong tọa độ. Shewchuk đã chứng minh điều này năm 1997 và dùng nó để làm exact predicates. Nhưng ông vẫn tính exact value rồi mới lấy sign — đây là lãng phí thông tin.
+Câu hỏi : Có encoding nào cho geometric objects sao cho sign của predicate = một bit trong encoding, không cần tính toán?
+
+**Cấu trúc toán học mới**
+
+Định nghĩa 1: Predicate Basis
+
+Cho một không gian hình học G(n) và một tập hữu hạn các predicates quan trọng P = {p₁, p₂, ..., pₖ}, định nghĩa Predicate Basis là một ánh xạ:
+
+Φ_P : G(n) → {0,1}^k
+
+trong đó bit thứ i của Φ_P(A) = 1 khi và chỉ khi predicate pᵢ giữ đúng với A.
+
+Đây không phải là mới. Điều mới là bước tiếp theo.
+
+Định nghĩa 2: Transformation Encoding
+
+Cho một transformation T (rotation, reflection, v.v.), định nghĩa Transformation Integer Z'_T là một integer sao cho:
+
+
+Φ_P(T(A)) = f(Z'_T, Φ_P(A))
+
+
+trong đó f là một hàm có complexity thấp nhất có thể.
+
+Câu hỏi trung tâm: Với tập predicates P nào, và với transformation group nào, thì f có thể là một phép bitwise đơn giản?
+
+**Câu trả lời — phân tầng rõ ràng**
+
+Tầng 1 — Đã chứng minh được ngay:
+
+Với P = {incidence predicates} và T = {rigid motions trong discrete geometry}:
+
+f = XOR  →  complexity O(N/w)
+
+Đây chính là Binary GABA. Nhưng bây giờ chúng ta hiểu tại sao nó đúng: vì incidence predicates chỉ cần biết "có giao hay không" — thông tin nhị phân — và XOR encode đúng cái đó.
+
+
+Tầng 2 — Provable với một chứng minh mới:
+
+Với P = {orientation predicates trong ℝⁿ} và T = {rigid motions}:
+
+
+f = bit-shift + XOR + một correction mask cố định
+→ complexity O(N/w) + O(1) lookup
+
+Điều kiện: coordinates được encode trong một basis cụ thể (sign-absorption basis đã mô tả trước đó). Đây là Open Theorem 1 — chưa ai prove nhưng có con đường rõ ràng.
+
+
+Tầng 3 — Revolutionary nếu đúng, chưa biết:
+
+Với P = {tất cả semialgebraic predicates bậc ≤ d} và T = {full rigid motion group SE(n)}:
+
+
+Conjecture: tồn tại Φ_P và f sao cho complexity(f) = O(d · N/w)
+
+Nếu conjecture này đúng, nó có nghĩa là bất kỳ geometric query bậc d đều có thể trả lời trong O(d) clock cycles sau O(N log N) preprocessing — bất kể N lớn đến đâu.
+
+**Tại sao đây là departure thực sự khỏi Clifford Algebra?**
+
+Clifford Algebra nói: "Encode objects as elements of an algebra, define a product, derive everything from the product."
+
+Framework mới nói: "Encode objects as characteristic functions of their predicate evaluations, define transformation as permutation of predicates, derive complexity from information content of queries."
+
+Cái thực sự mới: Query-Adaptive ⊛
+
+Thay vì một ⊛ universal (như Clifford product), định nghĩa một family của operations:
+
+
+⊛_Q  cho mỗi query class Q
+
+Mỗi ⊛_Q được tối ưu cho đúng query đó. Với incidence queries: ⊛_Q = AND. Với orientation queries: ⊛_Q = XOR + correction. Với distance queries: ⊛_Q = ADD trên packed integers.
+
+
+Hardware implication: một chip với k specialized ⊛ units, mỗi unit được wire cứng cho một query class. Bạn không cần programmable ALU — bạn cần geometric predicate evaluation units (GPEU) thay thế cho floating point units.
+
+
+**Bài toán mở trung tâm** :
+
+Tất cả mọi thứ trên hội tụ về một câu hỏi duy nhất, phát biểu chính xác:
+
+Định lý Conjecture (Geometric Information Completeness):
+Cho một tập P gồm k predicates semialgebraic bậc ≤ d trên ℝⁿ, và một transformation group G tác động trên ℝⁿ. Khi đó tồn tại:
+
+Một encoding Φ_P : ℝⁿ → ℤ^k có thể tính trong O(n log n)
+Một bộ operations {⊛_g : g ∈ G} trên ℤ^k với complexity O(k/w)
+
+Sao cho: Φ_P(g · x) = ⊛_g (Φ_P(x)) cho mọi x ∈ ℝⁿ, g ∈ G.
+
+Nếu chứng minh được conjecture này — dù chỉ cho G = SE(3) và P = các predicates cơ bản của CG — thì đây là kết quả lịch sử thực sự. Nó nói rằng computational geometry có information complexity thấp hơn algebraic complexity một cách cơ bản, và hardware có thể exploit điều đó.
