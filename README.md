@@ -4,7 +4,6 @@ Geometric Algebra as Big-integer Algebra and More
 
 ====================================
 
-====================================
 
 
 # Access
