@@ -101,3 +101,22 @@ Một bộ operations {⊛_g : g ∈ G} trên ℤ^k với complexity O(k/w)
 Sao cho: Φ_P(g · x) = ⊛_g (Φ_P(x)) cho mọi x ∈ ℝⁿ, g ∈ G.
 
 Nếu chứng minh được conjecture này — dù chỉ cho G = SE(3) và P = các predicates cơ bản của CG — thì đây là kết quả lịch sử thực sự. Nó nói rằng computational geometry có information complexity thấp hơn algebraic complexity một cách cơ bản, và hardware có thể exploit điều đó.
+
+
+**Một số thứ quan trọng liên quan đến việc giảm phạm vi lại một cách hợp lý:**
+
+Note : Tuy nhiên vẫn nên cố gắng hoàn thiện ý tưởng gốc, chỉ hạ cấp nếu cần thiết.
+
+Giới hạn Không gian: Từ Số thực ($\mathbb{R}^n$) xuống Lưới số nguyên ($\mathbb{Z}^n$) có giới hạn.
+Nếu không ổn thì không nên cố giải quyết bài toán trên số thực dấu phẩy động (floating-point). Giới hạn tọa độ của các đối tượng hình học vào một không gian lưới số nguyên (ví dụ: các điểm biểu diễn bằng số nguyên 24-bit hoặc 32-bit). Trong môi trường đồ họa máy tính hiện đại, điều này là hoàn toàn đủ dùng. Khi bạn dùng $\mathbb{Z}^n$, các phép toán bit-shift và XOR mới có cơ sở toán học vững chắc để không bị tràn số học (overflow) vô hình.
+
+Giới hạn Phép biến đổi: Nhóm biến đổi rời rạc thay vì liên tục.
+Thay vì xử lý mọi góc quay $\theta$ bất kỳ, hãy chứng minh hàm $f$ (phép tính bitwise) đúng với:
+Mọi phép tịnh tiến (Translation).
+Các phép quay góc vuông (Orthogonal rotations: $90^\circ, 180^\circ, 270^\circ$) và phép đối xứng (Reflection).
+Việc xoay các góc lẻ (ví dụ $13.5^\circ$) trên máy tính đằng nào cũng gây sai số lưới, nên nếu framework xử lý mượt mà các biến đổi rời rạc cốt lõi bằng bitwise, đó đã là một chiến thắng lớn.
+
+Giới hạn Encode: Chuyển từ "Global/Pre-computed" sang "Local/On-demand".
+Để tránh vụ nổ tổ hợp, $\Phi_P$ không nên là một vector lưu trước tất cả câu trả lời. $\Phi_P$ nên là một "Basis State" (Trạng thái cơ sở) được nén gọn cho từng điểm/cạnh. Khi cần kiểm tra Orientation hoặc In-circle của 3 hay 4 điểm, bạn lấy Basis State của chúng ném vào hàm $\circledast_Q$, và nó sinh ra cái bit kết quả ngay trong 1-2 clock cycles.
+
+
