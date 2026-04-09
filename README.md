@@ -36,19 +36,6 @@ Applying this to geometry: two geometric scenes A and B are geometrically equiva
 
 
 
-**Full abstract**
-
-Main paper :
-
-We present GABA (Geometric Algebra as Big-Integer Algebra), a framework that reformulates geometric computing by encoding entire geometric scenes as single big integers and all geometric transformations as integer matrix-vector products over a fixed Product-Index Table (PIT). We make four principal contributions. First, we prove that the GABA operation ⊗ is exactly the Clifford (geometric) product recast into integer arithmetic, with the index component always computable as bitwise XOR (Axiom G1) and the sign component determined by a grade-graded commutativity law (corrected Axiom G2). We prove all five GABA axioms hold, with exact integer arithmetic guaranteeing zero floating-point error. Second, we prove the Sparse OInt Theorem: for any grade-preserving linear map (versor action), the Operator Integer (OInt) matrix has at most C(2n,n) non-zero entries out of 4^n total, with density asymptotically 1/√(πn), and we prove this bound is tight for full rotation groups while achievable sparsity for single versors is substantially lower, measured at 4.7% for n=5 (CGA 3D). Third, we establish that Binary GABA (coefficients in GF(2)) forms a valid Clifford algebra over GF(2), is associative (verified over 500 random trials), and reduces incidence and collision-detection queries to bitwise AND/XOR operations on words of size ⌈N/w⌉. Fourth, we construct a canonical form for GInts under projective equivalence (Z ∼ λZ), verified correct on 1,000 random instances, and characterize its limits for broader geometric equivalences. Simulation-based analysis of a proposed ASIC pipeline shows O(log N) pipeline stages independent of scene size M, with a 170.7× throughput advantage over sequential dense computation at n=5. We also achieve 4.88× lossless SInt compression for point clouds. Throughout, we are explicit about what is proven, what is simulated, and what remains an open problem.
-
-Supplement :
-
-We present GABA (Geometric Algebra as Big-Integer Algebra), a formal algebraic framework that encodes geometric objects and operators as packed integer arrays, enabling uniform, exact computation across Euclidean, Projective, and Conformal geometries via a single table-driven operation ⊛. This whitepaper provides four critical contributions absent from the original GABA sketch: (1) a complete Faithfulness Lemma with proof establishing that the Product-Index Table (PIT) construction is isomorphic to the corresponding Clifford algebra Cl(p,q,r), eliminating all floating claims; (2) a thorough, exact analysis of coefficient growth with three concrete solutions—modular arithmetic (CRT), lazy GCD normalization, and floating-point GABA with explicit IEEE 754 error bounds—including a precise characterisation of when GABA achieves near-bitwise complexity; (3) a rigorous treatment of Binary GABA over GF(2), correcting the original characterisation and proving that the null-metric case yields the exterior algebra over GF(2) with a genuine boundary-operator connection to algebraic topology, while the Euclidean case yields a non-semisimple local ring; and (4) a polynomial-time canonical form for versor equivalence via Smith Normal Form of the adjoint integer matrix, with a proof of completeness. We further develop explicit connections to core Computational Geometry predicates (orientation, in-sphere, separation), provide rigorous operation-count benchmarks calibrated against CGAL and Versor with simulation-grounded estimates, and identify precise conditions under which GABA achieves demonstrable superiority over classical approaches. Our analysis is honest: GABA does not universally outperform optimised quaternion or matrix libraries for isolated operations, but provides a compelling advantage for exact batch transformations, degenerate-case robustness, and ASIC-targetable fixed-latency pipelines. All open problems from the original sketch are either resolved or given a concrete research roadmap.
-
-**Keywords:** Clifford algebra, Geometric algebra, Integer encoding, Exact arithmetic, Computational geometry, ASIC architecture, Smith Normal Form, Exterior algebra, GF(2), Coefficient growth.
-
-
 ====================================
 
 
@@ -67,22 +54,22 @@ We present GABA (Geometric Algebra as Big-Integer Algebra), a formal algebraic f
 
 **Recommended reading (Paper):** 
 
-Beta 2.0 :
-
-(Main paper) https://github.com/nahhididwin/GABA/blob/main/files/papers/paper2.docx ;
-
-(Supplement) https://github.com/nahhididwin/GABA/blob/main/files/papers/suppleforpaper2.docx ;
 
 Core Idea A : https://github.com/nahhididwin/GABA/blob/main/files/content/id07.txt ;
 
 Core Idea B : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt ;
 
 
-Alpha 1b : https://github.com/nahhididwin/GABA/blob/main/files/papers/paper1b.docx ;
 
-**Explanatory document (for 12th grade students):** 
+Beta 2.0 :
 
-Download it to your computer, then open it : https://github.com/nahhididwin/GABA/blob/main/files/study/s1.html
+(Main paper) https://github.com/nahhididwin/GABA/blob/main/files/papers/paper2.docx ;
+
+(Supplement) https://github.com/nahhididwin/GABA/blob/main/files/papers/suppleforpaper2.docx ;
+
+Alpha 1b : 
+
+https://github.com/nahhididwin/GABA/blob/main/files/papers/paper1b.docx ;
 
 
 
