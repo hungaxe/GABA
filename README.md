@@ -73,7 +73,9 @@ Beta 2.0 :
 
 (Supplement) https://github.com/nahhididwin/GABA/blob/main/files/papers/suppleforpaper2.docx ;
 
-Core Idea : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt ;
+Core Idea A : https://github.com/nahhididwin/GABA/blob/main/files/content/id07.txt ;
+
+Core Idea B : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt ;
 
 
 Alpha 1b : https://github.com/nahhididwin/GABA/blob/main/files/papers/paper1b.docx ;
