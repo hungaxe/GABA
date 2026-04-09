@@ -21,6 +21,7 @@ Geometric Algebra as Big-integer Algebra and More
 
 **Recommended reading (Paper):** 
 
+Core Idea C : https://github.com/nahhididwin/GABA/blob/main/files/content/id08.txt ;
 
 Core Idea A : https://github.com/nahhididwin/GABA/blob/main/files/content/id07.txt ;
 
