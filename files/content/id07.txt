@@ -78,6 +78,16 @@ Insight quan trọng: bạn không cần ⊛ phải là Geometric Product đầy
 Khi bạn nói ⊛ có độ phức tạp ngang XOR, bạn đang nói: một phép toán trên N-bit integer chỉ tốn O(N/w) clock cycles, với w = word size. Không có loop, không có lookup, không có multiply — chỉ là bitwise operations lan truyền song song qua toàn bộ integer.
 Câu hỏi thực là: có tồn tại một encoding Z, Z' sao cho Z' ⊛ Z = bitwise operation duy nhất không?
 
+Còn nhớ tôi nói gì không ? : "Processing THẬT SỰ ĐỂ LÀM GÌ? Tôi thấy thường là dùng để nhiều Input có thể đem ra so sánh với nhau."
+
+Nếu mục tiêu cuối cùng là comparison, thì bạn không cần ⊛ phải compute exact Geometric Product — bạn chỉ cần ⊛ phải bảo toàn equivalence class?
+
+Tức là: nếu A ~ B (hai scenes geometric equivalent), thì Z'⊛Z_A = Z'⊛Z_B — và đây là một điều kiện yếu hơn nhiều so với "⊛ = exact Geometric Product."
+Với điều kiện yếu hơn này, có thể tồn tại một ⊛ thực sự là XOR — không phải approximate, không phải với correction, mà chính xác — vì bạn chỉ cần preserve equivalence, không phải preserve exact coefficients?
+
+
+
+
 Tuy vậy nhưng có thể để khiến ⊛, Operator Integer Z', Single Big Integer (Z) trở nên khả thi và thật sự revolutionary, có thể chúng ta chỉ có thể tham khảo Geometric Algebra, và phải làm lại tất cả từ đầu, một kiểu trình bày thông tin mới?
 
 
