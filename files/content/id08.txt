@@ -1,3 +1,5 @@
+(09/04/2026) - DD/MM/YYYY
+
 Có vẻ đây là câu hỏi chúng ta cần quan tâm nhất : "Làm thế nào để encode geometric objects sao cho mọi câu hỏi quan trọng về chúng đều có câu trả lời bằng một phép bitwise duy nhất?"
 
 Quan sát nền tảng: Tất cả CG đều là sign tests
