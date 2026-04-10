@@ -14,7 +14,7 @@
 
 **Major languages:** English, Vietnamese;
 
-**Recommended reading (Paper):** 
+**Recommended reading (Paper + Idea):** 
 
 Core Idea C : https://github.com/nahhididwin/GABA/blob/main/files/content/id08.txt ;
 
