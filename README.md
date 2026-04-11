@@ -23,6 +23,10 @@ Core Idea A : https://github.com/nahhididwin/GABA/blob/main/files/content/id07.t
 Core Idea B : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt ;
 
 
+Beta 3.0 :
+
+(**.tex**) https://github.com/nahhididwin/GABA/blob/main/files/papers/paper.tex
+
 
 Beta 2.0 :
 
