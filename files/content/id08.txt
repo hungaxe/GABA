@@ -120,3 +120,6 @@ Giới hạn Encode: Chuyển từ "Global/Pre-computed" sang "Local/On-demand".
 Để tránh vụ nổ tổ hợp, $\Phi_P$ không nên là một vector lưu trước tất cả câu trả lời. $\Phi_P$ nên là một "Basis State" (Trạng thái cơ sở) được nén gọn cho từng điểm/cạnh. Khi cần kiểm tra Orientation hoặc In-circle của 3 hay 4 điểm, bạn lấy Basis State của chúng ném vào hàm $\circledast_Q$, và nó sinh ra cái bit kết quả ngay trong 1-2 clock cycles.
 
 
+Vật cản: Một hàm chỉ dựa trên XOR của các encoding điểm riêng lẻ không thể track được hướng (orientation) vì tính giao hoán của XOR sẽ triệt tiêu tính chất đan dấu (alternating) của định thức.Giải pháp khả thi: * Sử dụng số học vectơ hóa (SIMD): Thay vì cố tìm một phép bitwise thuần túy (như XOR), việc sử dụng số học số nguyên trên các encoding đã đóng gói (packed) cho phép đạt được độ phức tạp $\mathcal{O}(d \cdot N/w)$. Đây là sự kết hợp giữa "bitwise-style" và "vectorized arithmetic".Mã hóa cặp (Pairwise encoding): Thay vì mã hóa từng điểm, mã hóa các đường thẳng đi qua hai điểm có thể khiến vị từ định hướng trở thành tuyến tính, từ đó mở đường cho các phép toán đơn giản hơn.
+
+
