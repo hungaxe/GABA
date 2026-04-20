@@ -16,11 +16,11 @@
 
 **Recommended reading (Paper + Idea):** 
 
-Core Idea C : https://github.com/nahhididwin/GABA/blob/main/files/content/id08.txt ;
+Core Idea Type A : https://github.com/nahhididwin/GABA/blob/main/files/content/id07.txt
 
-Core Idea A : https://github.com/nahhididwin/GABA/blob/main/files/content/id07.txt ;
+Core Idea Type B : https://github.com/nahhididwin/GABA/blob/main/files/content/id08.txt ;
 
-Core Idea B : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt ;
+Core Idea Type C : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt ;
 
 
 Beta 3.0 :
