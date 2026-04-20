@@ -95,3 +95,13 @@ Lưu ý : Tôi biết nó trông vô cùng tham vọng, nhưng tôi chỉ mong m
 
 
 
+# Cơ mà vấn đề là 'Nên một toán tử “chỉ là XOR” mà vẫn giữ được toàn bộ sức mạnh của GP gần như chắc chắn không tồn tại cho trường hợp tổng quát, trừ khi bạn thu hẹp rất mạnh miền bài toán.'
+
+Vậy nên có thể đây là thứ cần :
+
+“Tìm một canonical representation của scene / multivector family sao cho các phép so sánh hoặc transform quan trọng trở thành một phép bitwise/hardware-friendly rất đơn giản.”
+
+Có thể là :
+
+“Tôi muốn xây một hệ biểu diễn integer-native cho geometric scenes, trong đó các đối tượng tương đương hình học được ánh xạ về cùng một canonical integer, và các transform quan trọng được thực thi bằng một tập nhỏ phép toán bitwise/word-level có chi phí thấp trên phần cứng chuyên dụng.”
+
