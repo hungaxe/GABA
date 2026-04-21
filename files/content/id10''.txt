@@ -412,3 +412,14 @@ and hardware-accelerated geometric reasoning.
 GABA là một kiến trúc biểu diễn và thực thi hình học exact trên miền hữu hạn và có prior mạnh, trong đó các đối tượng hình học không được lưu như tọa độ thô hay multivector tự do, mà được chuẩn hóa thành canonical integers đại diện cho lớp tương đương của chúng dưới một nhóm transform hữu hạn. Nhờ vậy, các truy vấn như equality, congruence, containment, transform composition, matching, dedup và lookup được hạ xuống thành các primitive cực rẻ trên word, bitset, LUT, SIMD, pipeline, hoặc carry-chain trên FPGA/ASIC.
 
 GABA không thay thế Geometric Algebra tổng quát. Nó tạo ra một geometric IR mới cho những bài toán mà equivalence, exactness, determinism, và hardware throughput quan trọng hơn việc biểu diễn liên tục đầy đủ. Trong đúng miền của nó, GABA không chỉ là một representation tốt hơn — nó là một cách tổ chức lại toàn bộ geometric computing thành một hệ thống nguyên tử, exact, và có thể phần cứng hóa từ gốc.
+
+
+Bổ sung :
+
+Hiện tại bản viết của ta thiên về:
+
+“geometry → canonical tokens”
+
+Nhưng chính xác hơn nên là ?:
+
+“geometry = action của một finite transform group lên một tập object rời rạc, và canonical token là đại diện của orbit đó”
