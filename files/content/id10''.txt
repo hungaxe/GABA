@@ -1,76 +1,134 @@
-# GABA: Exact Geometric Canonicalization for Finite-Domain Geometry
+GABA: Exact Geometric Canonicalization for Finite-Domain Geometry
+Tuyên ngôn
 
-Không cố thay thế Geometric Algebra tổng quát. Thay vào đó, tạo ra một lớp biểu diễn hình học nguyên thủy mới cho những miền bài toán có cấu trúc rõ, trong đó đối tượng hình học, quan hệ tương đương, và một tập transform hữu ích được chuẩn hóa thành integer canonical form để phần cứng thực thi bằng các primitive cực rẻ, exact, và song song.
+Geometric Algebra không sai. Nó chỉ không được thiết kế để thắng trong mọi miền bài toán.
+
+GABA không cố thay thế Geometric Algebra tổng quát. GABA nhắm vào một lớp bài toán khác: finite-domain geometry — nơi hình học đã được lượng tử hóa, miền transform bị giới hạn, và các truy vấn cốt lõi không phải là “tính xấp xỉ tốt hơn”, mà là:
+
+exact equality
+exact congruence
+exact containment / incidence
+exact transform composition
+dedup / hashing / lookup / matching
+throughput cực cao trên phần cứng song song
+
+Trong miền đó, việc lưu geometry như các tọa độ liên tục hoặc multivector tự do là một sự lãng phí kiến trúc. Thứ ta thật sự cần không phải là một representation giàu biểu thức nhất, mà là một canonical geometric IR: một lớp biểu diễn nguyên tử, integer-native, exact, và hardware-friendly.
 
 Geometry as a finite algebra over equivalence classes, not coordinates.
 
-Tức là bạn không lưu “object”
-mà lưu:
+Nói cách khác:
+ta không lưu “object” theo kiểu hình học liên tục, mà lưu canonical class của object dưới một nhóm transform hữu hạn.
 
-class đại diện canonical của object dưới một nhóm transform hữu hạn.
+1) Luận điểm cốt lõi
 
+Hầu hết hệ hình học hiện đại tối ưu cho:
 
+tính tổng quát,
+độ biểu đạt,
+hoặc xấp xỉ số học.
 
-Biến một lớp hình học hữu ích thành một ngôn ngữ dữ liệu integer-native có canonical form, để các truy vấn quan trọng nhất như:
+Nhưng trong rất nhiều bài toán thực tế quan trọng, thứ quyết định hiệu năng không phải là expressiveness tối đa, mà là:
 
-equality / congruence
-transform equivalence
-incidence / containment
-composition trong một nhóm transform hữu hạn
-matching / dedup / hashing / lookup
+đúng tuyệt đối
+so sánh cực nhanh
+composition rẻ
+triển khai song song được
+ổn định trên phần cứng
 
-trở thành các thao tác rất rẻ trên word, bitset, LUT, SIMD, pipeline, hoặc carry-chain trên FPGA/ASIC.
+Đây là điểm xuất phát của GABA.
 
-Nói ngắn gọn:
-không phải geometric algebra mới, mà là geometric IR mới.
+GABA biến một lớp hình học hữu ích thành một ngôn ngữ dữ liệu integer-native trong đó những thao tác đắt đỏ nhất của geometry được hạ xuống thành các primitive rất rẻ:
 
-Miền mục tiêu đầu tiên
+word compare
+bitset operation
+LUT lookup
+SIMD lane ops
+pipeline stages
+carry-chain arithmetic trên FPGA/ASIC
 
-Finite-resolution geometric computing cho:
+Vì vậy, GABA không phải “một đại số mới cho mọi hình học”, mà là một hình học máy tính mới cho các miền hữu hạn có prior mạnh.
 
-robotics / motion planning
-CAD / inspection
+2) Miền bài toán mà GABA nhắm tới
+
+GABA đặc biệt mạnh trong các hệ mà geometry không còn là một continuum thuần túy, mà là một hệ hữu hạn có cấu trúc:
+
+robotics và motion planning
+CAD / inspection / metrology
 collision / visibility / occupancy
 voxel / grid / lattice geometry
-shape equivalence trong dữ liệu hình học đã lượng tử hóa
+scene understanding sau quantization
+shape equivalence trên dữ liệu đã lượng tử hóa
+digital twin / manufacturing verification
 
-Đây là nơi trade-off của thắng rõ nhất, vì bài toán thực tế thường không cần mọi thứ trên ℝ liên tục, mà cần:
+Đây là những miền mà:
 
-exact
-repeatable
-compare nhanh
-transform nhanh
-hợp phần cứng
+dữ liệu đến từ sensor hoặc pipeline đã có độ phân giải hữu hạn,
+transform thực tế không cần vô hạn tự do,
+và tốc độ quyết định giá trị hệ thống.
 
+Nếu bài toán cần:
 
->> No Free Lunch: không có representation nào thắng cho mọi bài toán, nên phải chọn đúng miền có phân phối bài toán tốt cho mình.
+exact,
+repeatable,
+compare nhanh,
+transform nhanh,
+và hợp phần cứng,
 
-1) Geometric objects không được lưu như “multivector tự do”
+thì GABA có cơ hội thắng rất lớn.
 
-Chúng được lưu như canonical geometric tokens:
+3) Định nghĩa GABA
 
-loại primitive: point / line / plane / segment / circle / sphere / pose / rigid frame / constraint
-tọa độ nguyên hoặc hữu tỉ đóng gói chung denominator
-support mask theo basis
+GABA là một kiến trúc biểu diễn và thực thi hình học exact trên miền hữu hạn, trong đó:
+
+Đối tượng hình học được canonicalize thành token nguyên tử.
+Quan hệ tương đương được mã hóa thành lớp canonical dưới một group transform hữu hạn.
+Transform hữu ích nhất được compile thành primitive cố định, bounded, và song song được.
+Truy vấn cốt lõi trở thành thao tác integer-level rất rẻ.
+
+Nó là một dạng geometric IR, không phải chỉ là một data format.
+
+IR ở đây nghĩa là:
+
+có semantics rõ,
+có canonicalization,
+có rewrite rules,
+có composition,
+có runtime model,
+và có đường map xuống hardware.
+4) Đối tượng không còn là “multivector tự do”
+
+GABA không lưu geometry như một đối tượng biểu thức mở vô hạn.
+
+Thay vào đó, mỗi object được lưu như một canonical geometric token gồm các trường logic có cấu trúc:
+
+primitive type
+ví dụ: point / line / plane / segment / circle / sphere / pose / rigid frame / constraint
+coordinate packet
+tọa độ nguyên hoặc hữu tỉ đã đóng gói
+support mask
+mô tả đối tượng “sống” trên basis nào
 orientation class
+lớp hướng dưới group transform đã chọn
 scale class
+lớp tỷ lệ nếu domain cho phép scale rời rạc
 invariant signature
+bộ đặc trưng bất biến để lọc nhanh và giảm search
 exact coefficient packet
+gói hệ số exact phục vụ reconstruction hoặc chứng minh tương đương
 
-Tức là thay vì hỏi:
+Điểm mấu chốt là:
 
-“multivector này có bao nhiêu hệ số?”
+Thay vì hỏi “multivector này có bao nhiêu hệ số?”, ta hỏi “đối tượng này thuộc lớp tương đương nào trong miền hình học hữu hạn đã chọn?”
 
-Ta hỏi:
+Đó là thay đổi từ representation-by-expression sang representation-by-equivalence-class.
 
-“đối tượng này thuộc lớp tương đương nào trong miền hình học hữu hạn đã chọn?”
+5) Canonicalization không phải symbolic normalization tổng quát
 
-2) Canonicalization không phải symbolic normalization tổng quát
+Đây là điểm sống còn của toàn bộ hệ.
 
-Đây là điểm sống còn để tránh sập lợi thế phần cứng.
+GABA không làm canonicalization theo kiểu symbolic algebra tổng quát. Nó không đi tìm một “normal form tối hậu” cho mọi biểu thức hình học.
 
-Bạn không canonicalize theo kiểu tổng quát như đại số ký hiệu vô hạn.
-Bạn chỉ canonicalize trong một ngôn ngữ hình học hạn chế nhưng đủ mạnh, bằng các bước local và hữu hạn:
+Nó chỉ canonicalize trong một ngôn ngữ hình học hạn chế nhưng đủ mạnh, bằng các bước:
 
 chuẩn hóa trật tự
 chuẩn hóa dấu
@@ -79,58 +137,275 @@ chuẩn hóa scale theo rule cố định
 reduce theo invariant rules
 pack vào integer word(s)
 
-Nghĩa là canonicalization phải là:
+Canonicalization trong GABA phải có tính chất:
 
-compile-time nếu có thể
-ingestion-time nếu là scene
-incremental nếu là transform stream
-local rewrite nếu là update nhỏ
+bounded
+local
+deterministic
+streamable
+hardware-friendly
 
-Chứ không phải mỗi lần query đều đi tìm “normal form tối hậu” của một biểu thức hình học tổng quát.
+Nói cách khác, canonicalization phải giống một decode/normalize pipeline, không phải một CAS vô hạn.
 
-3) Exact arithmetic là mặc định, không phải ngoại lệ
+Ba nơi canonicalization được phép xảy ra
+compile-time: khi cấu trúc đã biết trước
+ingestion-time: khi scene hoặc map được nạp vào
+incremental-time: khi transform stream cập nhật dần
 
-Trong miền xác định, mọi thứ chạy exact.
-Chỉ khi ra khỏi miền mới:
+Không nên để canonicalization nặng xảy ra ở runtime query tổng quát.
 
-reject
-route sang fallback exact layer
-hoặc nâng cấp representation
+6) Exact arithmetic là mặc định
 
+Trong miền của GABA, exact không phải là ngoại lệ.
 
-A. Nếu canonicalization không rẻ thì sao?
+Mọi thao tác trong domain xác định đều chạy exact:
 
-Thì đừng đặt canonicalization ở runtime tổng quát.
+so sánh exact
+transform exact
+composition exact
+containment exact
+hashing exact
 
-Giải pháp đúng là:
+Chỉ khi dữ liệu đi ra ngoài miền đã định nghĩa, hệ mới:
 
-Thu hẹp domain
-Thu hẹp transform family
-Đóng gói canonical form thành một số primitive cố định
-Để compiler / preprocessor / ingest pipeline làm phần nặng
+reject,
+fallback sang exact layer khác,
+hoặc nâng cấp representation.
 
-Nói cách khác, canonicalization phải được thiết kế giống một decode/normalize pipeline hơn là một bài toán symbolic algebra tổng quát.
+Điều này đặc biệt quan trọng cho:
 
+robotics,
+inspection,
+verification,
+manufacturing,
+safety-critical geometry.
 
-B. No Free Lunch đánh ở đâu?
+Ở những hệ đó, “gần đúng” không chỉ là chậm sai; nó có thể là sai về mặt hệ thống.
 
-Nó đánh vào tham vọng “một encoding ăn hết mọi thứ”.
+7) Miền transform phải bị khóa chặt
 
-Nói thẳng:
+Nếu transform family quá lớn, canonicalization sẽ phình ra và hệ thống mất lợi thế.
 
-nếu bạn muốn universal GA replacement, bạn sẽ thua
-nếu bạn muốn exact on finite-domain geometry, bạn có cửa rất lớn
-nếu bạn muốn transform rẻ, canonicalization phải bị giới hạn
-nếu bạn muốn canonicalization rất mạnh, domain phải rất chặt
+Vì vậy, GABA không chọn “mọi transform khả dĩ”.
+Nó chọn một group transform hữu hạn hoặc finitely generated, phù hợp với domain.
 
+Ví dụ:
 
-Có thể : Hardware pipeline
-FPGA / ASIC cho robotics / CAD inspection
+grid translations
+discrete rotations
+reflections nếu cần
+pose transforms lượng tử hóa
+rigid motions trong một subgroup hữu hạn
 
+Điểm mấu chốt là:
 
+Transform group phải đủ mạnh để dùng được, nhưng đủ nhỏ để canonical hóa rẻ.
 
-Cho nên kết luận đúng là:
+Đây là trade-off trung tâm của hệ.
 
-GABA không phải là đại số tốt nhất cho mọi hình học. GABA là đại số tốt nhất cho một lớp hình học hữu hạn, có prior mạnh, cần exact, cần so sánh nhanh, cần transform nhanh, và cần phần cứng song song.
+8) Primitive algebra của GABA
 
-GABA là một kiến trúc biểu diễn và thực thi hình học exact trên miền hữu hạn, trong đó các đối tượng và scene được chuẩn hóa thành canonical integers, còn các transform hữu ích nhất được compile thành một tập nhỏ primitive phần cứng cực rẻ. Nó không thay thế Geometric Algebra tổng quát, mà tạo ra một geometric IR mới cho những bài toán mà equivalence, exactness, và hardware throughput quan trọng hơn biểu diễn liên tục đầy đủ.
+GABA chỉ có ý nghĩa nếu nó định nghĩa được một tập operation nhỏ nhưng đủ mạnh, mỗi operation đều bounded và composable.
+
+Các primitive cốt lõi nên là:
+
+8.1 Equality / Congruence
+so token
+so canonical signature
+so class under transform group
+
+Mục tiêu: gần O(1), hoặc ít nhất là bounded và cache-friendly.
+
+8.2 Incidence / Containment
+point-in-cell
+segment-on-line
+object-inside-region
+object-touching-boundary
+
+Mục tiêu: exact, integer-based, không epsilon.
+
+8.3 Transform Composition
+compose transform tokens
+apply transform lên object token
+normalize lại nếu cần
+
+Mục tiêu: bounded-time, pipeline-friendly.
+
+8.4 Matching / Dedup / Lookup
+shape equivalence
+scene deduplication
+cache hit by canonical class
+nearest exact class under domain rules
+
+Mục tiêu: hardware hash-table friendly.
+
+8.5 Local Rewrite
+normalize segment orientation
+reorder basis
+reduce redundant sign/scale
+collapse equivalent packets
+
+Mục tiêu: rẻ, local, deterministic.
+
+9) Canonical form là trung tâm của toàn hệ
+
+Canonical form trong GABA không phải chỉ là một biểu diễn đẹp. Nó là định danh logic của object.
+
+Một canonical token tốt phải có các tính chất:
+
+duy nhất trong domain xác định
+ổn định trước các transform đã chọn
+so sánh rẻ
+pack được vào word-level storage
+có thể stream qua hardware
+có thể hash và index trực tiếp
+Gợi ý cấu trúc canonical token
+
+Một token có thể gồm:
+
+type_id
+dim_id
+orientation_class
+scale_class
+support_mask
+invariant_hash
+exact_payload
+
+Cấu trúc thật sẽ phụ thuộc domain, nhưng triết lý không đổi:
+
+canonical token phải đủ để quyết định equivalence nhanh, và đủ để reconstruction khi cần.
+
+10) Hai tầng của hệ: invariant và canonical
+
+Cần tách rõ hai khái niệm này.
+
+Invariant
+
+Dùng để:
+
+lọc nhanh
+giảm search space
+làm fingerprint
+kiểm tra bất biến dưới một nhóm transform
+Canonical form
+
+Dùng để:
+
+đại diện duy nhất
+lookup
+equality exact
+dedup
+
+Invariant không thay canonical form.
+Invariant chỉ dẫn đường để canonicalization và matching nhanh hơn.
+
+11) Kiến trúc pipeline của GABA
+
+GABA nên được nhìn như một pipeline, không phải chỉ là một representation.
+
+Tầng 1: Ingest
+nhận object geometry từ sensor, CAD, map, mesh, hoặc scene graph
+lượng tử hóa nếu cần
+kiểm tra domain contract
+Tầng 2: Normalize
+reorder
+sign normalize
+axis normalize
+scale normalize
+collapse equivalent encodings
+Tầng 3: Canonicalize
+chuyển sang token duy nhất
+pack into integer words
+gắn signature / class ID
+Tầng 4: Store / Index
+hash table
+bitset index
+LUT index
+compressed scene store
+Tầng 5: Query / Compose
+equality
+containment
+composition
+matching
+dedup
+Tầng 6: Hardware execution
+SIMD
+FPGA pipeline
+ASIC primitive
+memory coalescing
+low-latency compare paths
+
+Đây là điểm khiến GABA khác một thư viện geometry thông thường:
+nó là một execution model.
+
+13) No Free Lunch: đánh ở đâu?
+
+No Free Lunch đánh vào tham vọng “một encoding ăn hết mọi thứ”.
+
+GABA chỉ có thể thắng nếu ta chấp nhận một số ranh giới:
+
+không universal
+không continuous geometry tổng quát
+không symbolic normalization vô hạn
+không transform family mở quá rộng
+
+Nhưng đổi lại, GABA có thể thắng rất mạnh ở nơi cần:
+
+exactness
+throughput
+repeatability
+hardware mapping
+equivalence reasoning
+
+Câu kết đúng không phải là “GABA tốt nhất cho mọi hình học”, mà là:
+
+GABA là một lớp biểu diễn và thực thi hình học exact cho finite-domain workloads, nơi equivalence, determinism, and hardware throughput quan trọng hơn continuous expressiveness.
+
+14) Mệnh đề kỹ thuật cốt lõi
+
+Có thể cô đọng GABA thành 4 mệnh đề:
+
+Mệnh đề 1
+
+Geometry trong miền này nên được biểu diễn như equivalence classes, không phải coordinates tự do.
+
+Mệnh đề 2
+
+Canonicalization phải là bounded, local, deterministic, không phải symbolic normalization tổng quát.
+
+Mệnh đề 3
+
+Exact arithmetic là mặc định; approximation chỉ là đường thoát khi ra khỏi domain.
+
+Mệnh đề 4
+
+Kiến trúc tốt phải tối ưu cho compile-time / ingest-time / streaming-time, không để runtime query gánh toàn bộ chi phí.
+
+15) Định vị GABA như một nền tảng mới
+
+GABA không phải:
+
+một thư viện geometry khác,
+một GA replacement,
+hay một trick encoding.
+
+GABA là:
+
+một geometric IR
+một canonicalization system
+một hardware execution model
+cho finite-domain exact geometry
+
+Nếu thành công, nó mở ra một lớp hệ mới cho:
+
+robotics autonomy,
+inspection,
+CAD verification,
+occupancy reasoning,
+shape equivalence,
+and hardware-accelerated geometric reasoning.
+16) Kết luận
+
+GABA là một kiến trúc biểu diễn và thực thi hình học exact trên miền hữu hạn và có prior mạnh, trong đó các đối tượng hình học không được lưu như tọa độ thô hay multivector tự do, mà được chuẩn hóa thành canonical integers đại diện cho lớp tương đương của chúng dưới một nhóm transform hữu hạn. Nhờ vậy, các truy vấn như equality, congruence, containment, transform composition, matching, dedup và lookup được hạ xuống thành các primitive cực rẻ trên word, bitset, LUT, SIMD, pipeline, hoặc carry-chain trên FPGA/ASIC.
+
+GABA không thay thế Geometric Algebra tổng quát. Nó tạo ra một geometric IR mới cho những bài toán mà equivalence, exactness, determinism, và hardware throughput quan trọng hơn việc biểu diễn liên tục đầy đủ. Trong đúng miền của nó, GABA không chỉ là một representation tốt hơn — nó là một cách tổ chức lại toàn bộ geometric computing thành một hệ thống nguyên tử, exact, và có thể phần cứng hóa từ gốc.
