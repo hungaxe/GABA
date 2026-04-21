@@ -16,6 +16,8 @@
 
 **Recommended reading (Paper + Idea):** 
 
+Core Idea Type S : https://github.com/nahhididwin/GABA/blob/main/files/content/id10''.txt
+
 Core Idea Type A : https://github.com/nahhididwin/GABA/blob/main/files/content/id07.txt
 
 Core Idea Type B : https://github.com/nahhididwin/GABA/blob/main/files/content/id08.txt ;
