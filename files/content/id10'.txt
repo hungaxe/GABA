@@ -1,0 +1,42 @@
+21/04/2026 (DD/MM/YYYY)
+
+Idea này có dựa trên "IN4T", Geometric Algebra/Clifford Algebra, Geometric Product, Number Theory, ASIC/FPGA, No Free Lunch Theorem,...
+
+
+Thật sự giống như đi trên đường dây điện, khi mà chỉ cần hiểu nhầm một tý ý tưởng của tôi thôi cũng có thể xảy ra sự hiểu lầm tai hại? Hy vọng bạn đọc thật kỹ và liên hệ nó với thực tế để tránh hiểu lầm ? :
+
+
+Mục tiêu cốt lõi không phải là “biến Geometric Product thành XOR”, mà là:
+
+Thiết kế một hệ biểu diễn integer-native cho geometric data, trong đó một lớp đủ lớn các multivector / scene / transform quan trọng được ánh xạ về dạng canonical integer, và một số phép biến đổi hình học chủ đạo được thực thi bằng các phép toán phần cứng rất đơn giản, rất song song, và exact trên miền hữu hạn đã xác định.
+
+Không cố thay thế toàn bộ Geometric Algebra bằng một phép toán duy nhất cho mọi trường hợp.
+Thay vào đó, tìm một representation và một operator family sao cho những transform cần thiết nhất trở nên cực kỳ rẻ trên phần cứng chuyên dụng.
+
+GABA (Geometric Algebra Bitwise Architecture) là một hướng nghiên cứu về biểu diễn hình học bằng số nguyên lớn và phép toán phần cứng-native.
+
+Ý tưởng trung tâm là:
+1. Mỗi multivector trong một miền xác định được mã hóa thành một canonical integer representation.
+2. Các scene / cấu hình hình học tương đương được ánh xạ về cùng một dạng chuẩn, hoặc về những dạng có thể so sánh trực tiếp bằng thao tác bitwise / word-level.
+3. Các transform quan trọng như rotation, reflection, projection, composition trong một miền đã thu hẹp được compile thành những toán tử rất rẻ trên hardware.
+4. Exact arithmetic là mặc định trong miền xác định, thay vì là tùy chọn.
+5. Trọng tâm không phải là “đánh bại GP tổng quát về mặt toán học”, mà là đạt lợi thế cực lớn về biểu diễn, so sánh, và thực thi phần cứng cho geometric computing/Computational Geometry.
+
+“Tôi muốn tìm một encoding sao cho những phép so sánh và transform quan trọng nhất trở thành các thao tác bitwise/word-level cực rẻ, trong khi vẫn giữ được tính đúng đắn exact trên miền bài toán mà tôi quan tâm.”
+
+Đề xuất này khám phá một lớp biểu diễn hình học mới, trong đó multivector và geometric transform được nén vào canonical integers nhằm khai thác tối đa song song mức bit và mức word trên phần cứng chuyên dụng. Thay vì cố mô phỏng đầy đủ Geometric Product trong mọi trường hợp, hệ này nhắm tới việc compile các phép toán hình học có ý nghĩa thực dụng thành một tập nhỏ các primitive cực rẻ, exact, và hardware-friendly.
+
+Đích đến không phải là “thay thế GA bằng một phép toán duy nhất”, mà là tạo ra một nền tảng biểu diễn và thực thi mới, nơi các equivalence classes hình học, các phép so sánh, và một số transform cấu trúc quan trọng trở thành các thao tác integer-native gần như tức thời trên ASIC/FPGA.
+
+Trọng tâm :
+
+1. Representation
+Không chỉ là “mã hóa multivector thành số nguyên”, mà là tạo một ngôn ngữ biểu diễn chuẩn hóa cho geometric scenes.
+
+2. Equivalence-first computation
+Không nhất thiết phải tính mọi hệ số chi tiết mọi lúc. Quan trọng hơn là bảo toàn những bất biến và quan hệ tương đương có ích cho so sánh, suy luận, và transform.
+
+3. Hardware co-design
+Phần “đột phá” không nằm ở toán học trừu tượng thuần túy, mà ở chỗ representation được thiết kế ngay từ đầu để ăn khớp với ASIC/FPGA, pipeline, carry-chain, SIMD, bit-parallel logic.
+
+Tôi không tìm một phép toán thay thế Geometric Product cho mọi thứ; tôi tìm một hệ biểu diễn integer-native cho geometric data, trong đó các đối tượng và transform quan trọng được chuẩn hóa và thực thi bằng một tập nhỏ phép toán phần cứng cực rẻ, exact, và đủ mạnh để mở ra một kiến trúc mới cho geometric computing/Computational Geometry.
