@@ -40,3 +40,11 @@ Không nhất thiết phải tính mọi hệ số chi tiết mọi lúc. Quan t
 Phần “đột phá” không nằm ở toán học trừu tượng thuần túy, mà ở chỗ representation được thiết kế ngay từ đầu để ăn khớp với ASIC/FPGA, pipeline, carry-chain, SIMD, bit-parallel logic.
 
 Tôi không tìm một phép toán thay thế Geometric Product cho mọi thứ; tôi tìm một hệ biểu diễn integer-native cho geometric data, trong đó các đối tượng và transform quan trọng được chuẩn hóa và thực thi bằng một tập nhỏ phép toán phần cứng cực rẻ, exact, và đủ mạnh để mở ra một kiến trúc mới cho geometric computing/Computational Geometry.
+
+
+Một số vấn đề :
+
+Nếu bước canonical không rẻ, ta mất toàn bộ lợi thế hardware.
+
+“No Free Lunch” sẽ đánh ta ở đâu (hợp lý), domain rất quan trọng và cần thiết cụ thể nào mà trade-off này có lợi ?
+
