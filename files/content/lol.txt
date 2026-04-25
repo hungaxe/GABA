@@ -33,6 +33,8 @@ Processing -> Output_2 : 3
 Compare : "3 = 3" => 1 + 1 + 1 = 1 + 2;
 (Tôi đoán đọc nó có thể giúp bạn thấy dễ hiểu hơn, nhưng cũng có thể khiến bạn ngộ nhận? : mấy thứ khác như if/elif/else thực tế cũng là compare)
 
+Tránh ngộ nhận : Mục tiêu của các bài toán dựa trên phép "cộng" vốn không phải để so sánh (kiểu <;>;=), mà nó là một thứ trừu tượng hơn. Kiểu như ta có thể hiểu rằng đi 1 mét + 1 mét = 2 mét; thì biết rằng 2 mét ngoài đời là như nào chứ không nhầm sang 3 mét; Gọi là có thể phân biệt được giữa các output ấy, tạo ra "ngữ nghĩa".
+
 Tức là về cơ bản, cần có một môi trường có thể so sánh được, và công cụ để làm điều đó là "process", kiểu như bitwise ?
 
 Thực tế thì nhiều thứ khác trừu tượng hơn, tôi thấy đa số bản chất đều thế.
