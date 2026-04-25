@@ -23,6 +23,10 @@ Core Idea Type B : https://github.com/nahhididwin/GABA/blob/main/files/content/i
 
 Core Idea Type C : https://github.com/nahhididwin/GABA/blob/main/files/content/trypostid/pid0.7.txt ;
 
+Beta 4.0 :
+
+https://github.com/nahhididwin/GABA/tree/main/files/papers/lolx1's
+
 
 Beta 3.0 :
 
