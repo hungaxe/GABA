@@ -1,0 +1,90 @@
+04/04/2026 (DD/MM/YYYY) - 25/04/2026 (DD/MM/YYYY)
+
+Thật sự giống như đi trên đường dây điện, khi mà chỉ cần hiểu nhầm một tý ý tưởng của tôi thôi cũng có thể xảy ra sự hiểu lầm tai hại? Hy vọng bạn đọc thật kỹ và liên hệ nó với thực tế để tránh hiểu lầm ? :
+
+Idea này có dựa trên Geometric Algebra/Clifford Algebra, Geometric Product, Number Theory, ASIC/FPGA,...
+
+
+Mục tiêu :
+1. Tạo ra một phép toán có thể thay thế hoàn toàn Geometric Product (không phải tăng tốc Geometric Product), nhưng với sự khác biệt lớn, độ phức tạp,.. (Chi tiết ở dưới)
+2. Operator Integer (Z'). Toàn bộ mọi transformation hình học (rotation, reflection, projection, ...) được compile thành một số nguyên duy nhất, và được ứng dụng như bên dưới.
+3. "Trải phẳng" toàn bộ các multivectors trong không gian ra thành big-int duy nhất.
+4. Exact arithmetic là default, không phải optional.
+5. Hardware : ASIC custom?
+
+
+# Title : GABA:
+
+
+Một thứ tôi muốn bạn hình dung trước khi bắt đầu : Bạn có thể thấy, khi mà 1 single-big-int duy nhất có thể tính toán song song hoàn toàn với các phép logic, 
+bitwise, cộng trên phần cứng chuyên biệt. Giờ tôi có tham vọng rất lớn là làm sao để làm được điều tương tự với quy mô Geometric Product, 
+và nhiều thứ hơn thế nữa trong Geometric Computing? Nói thẳng ra tôi muốn có 1 ý tưởng cách mạng nào đó?
+Và thực tế thì động lực để tôi tin vào việc này đó là một góc nhìn của tôi :
+"
+Có lẽ bạn đã quá quen với thứ này : Input -> Processing -> Output ;
+Nhưng rốt cuộc "Processing" THẬT SỰ ĐỂ LÀM GÌ?
+Tôi thấy thường là dùng để nhiều Input có thể đem ra "so sánh" với nhau. Tức nó biến Input -> "Một thứ có thể đem ra so sánh với nhau".
+
+Example liên quan đến số :
+In_1 : 1 + 1 + 1
+Processing -> Output_1 : 3
+In_2 : 1 + 2
+Processing -> Output_2 : 3
+Compare : "3 = 3" => 1 + 1 + 1 = 1 + 2;
+(Tôi đoán đọc nó có thể giúp bạn thấy dễ hiểu hơn, nhưng cũng có thể khiến bạn ngộ nhận? : mấy thứ khác như if/elif/else thực tế cũng là compare)
+
+Tức là về cơ bản, cần có một môi trường có thể so sánh được, và công cụ để làm điều đó là "process", kiểu như bitwise ?
+
+Thực tế thì nhiều thứ khác trừu tượng hơn, tôi thấy đa số bản chất đều thế.
+Vậy thì hẳn là tôi phải tìm cách nào đó để có thể đem Input ra so sánh với nhau, xử lý trước qua 1 bước "Process" mà bước này càng tốt thì càng có giá trị?
+
+Vấn đề ở đây là, tôi nhìn dưới dạng thông tin và thấy rằng thực tế là "Input" -> "Output" chỉ là thay đổi thông tin theo các điều kiện/yêu cầu ta muốn, vậy tại sao lại
+thực sự cần những "process" nặng như matrix mul hay convolution? Ý tôi là có cách nào để kết hợp thông tin kiểu như "Input" kết hợp với "Task" -> "Output" mà phép "kết hợp"
+lại rất rẻ, vì đơn giản là kết hợp thông tin? Có lẽ mấu chốt nằm ở "môi trường".
+"
+
+
+**Kiến trúc :**
+
+Thứ nhất: Một Multivector (A) → Single Big Integer (Z_A)
+
+Encode multivector A trong G(n) như sau:
+
+
+Z_A = [ a₀₀₀ | a₀₀₁ | a₀₁₀ | a₀₁₁ | a₁₀₀ | a₁₀₁ | a₁₁₀ | a₁₁₁ ]
+       ←─────────────── f bits mỗi field ──────────────────────────→
+       Tổng: f · 2ⁿ bits — đây là Z_A, một single big integer
+
+
+Note : Integer coefficient (exact, no float). Guard bits giữa các a_i = zero overflow corruption.
+
+Thứ hai: Toàn bộ các Multivectors trong không gian → Single Big Integer (Z) (Lặp lại với quy mô lớn hơn)
+
+
+Encode multivectors trong G(n) như sau:
+
+
+Z = [ Z_A | Z_B | Z_C | Z_D | ... ]
+    ←─── f' bits mỗi field ────────→
+       Và đây là Một single big integer duy nhất.
+
+Note : Integer coefficient (exact, no float). Guard bits giữa các Z_N = zero overflow corruption.
+Nhìn chung nó giống như việc nD -> 1D hoặc 3D -> 1D (Nếu bùng nổ bộ nhớ)?
+
+
+
+Thứ ba: Operator Integer Z'
+
+Thứ tôi muốn nói : Z' là một encoded geometric operator — rotor, reflector, projector, versor,.. — được encode như một big integer sao cho:
+
+Z' ⊛ Z  =  kết quả geometric  (một big integer)
+
+
+
+Thứ tư: ⊛ Là Gì? 
+
+Như tôi đã nói ở trên 'Vấn đề ở đây là, tôi nhìn dưới dạng thông tin và thấy rằng thực tế là "Input" -> "Output" chỉ là thay đổi thông tin theo các điều kiện/yêu cầu ta muốn, vậy tại sao lại
+thực sự cần những "process" nặng như matrix mul hay convolution? Ý tôi là có cách nào để kết hợp thông tin kiểu như "Input" kết hợp với "Task" -> "Output" mà phép "kết hợp"
+lại rất rẻ, vì đơn giản là kết hợp thông tin? Có lẽ mấu chốt nằm ở "môi trường"'.
+
+Vậy nên ⊛ chính là phép kết hợp thông tin. Target là rẻ như XOR, nhưng thực tế không phải XOR;
